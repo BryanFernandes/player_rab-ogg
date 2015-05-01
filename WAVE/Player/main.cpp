@@ -48,6 +48,9 @@ int SDL_main(int argc, char *argv[])
 	control->setSound(sound);
 
 	//------------------------------------
+	w.setControl(control);
+
+	//------------------------------------
 	w.show();
 	
 	return app.exec();

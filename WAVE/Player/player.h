@@ -18,6 +18,10 @@ class Player : public QMainWindow
 public:
     explicit Player(QWidget *parent = 0);
     ~Player();
+    void setControl(SoundCTRL *control);
+
+public:
+	SoundCTRL *soundCTRL;
     
 private:
     Ui::Player *ui;

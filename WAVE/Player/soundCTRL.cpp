@@ -31,9 +31,6 @@ SoundCTRL::setView(Ui_meta *view)
 	
 	connect(this, SIGNAL(changeAllMarks()), this->view, SLOT(changeMarksLabels()));
 	
-	// QKeySequence ks(Qt::Key_Right); // btw, this is numpad enter
-	// QShortcut* shortcut = new QShortcut(ks, this);
-	// connect(shortcut, SIGNAL(activated()), ui->playOrPauseButton, SLOT(clicked()));
 	connect(view, SIGNAL(nextMark(uint32_t, Format*)), this, SLOT(forward(uint32_t, Format*)));
 	connect(view, SIGNAL(prevMark(uint32_t, Format*)), this, SLOT(rewind(uint32_t, Format*)));
 	
