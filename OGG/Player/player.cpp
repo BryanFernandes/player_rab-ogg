@@ -6,6 +6,16 @@ Player::Player(QWidget *parent) :
     ui(new Ui::Player)
 {
     ui->setupUi(this);
+
+    cerr << endl << "Usando prints para marcar entrada e saida dos metodos abaixo:" << endl;
+	cerr << "\t* ui_meta.cpp -> Ui_meta" << endl;
+	cerr << "\t* ui_meta.cpp -> playOrPause" << endl;
+	cerr << "\t* sounddevice.cpp -> open" << endl;
+	cerr << "\t* sounddevice.cpp -> openWAV" << endl;
+	cerr << "\t* sounddevice.cpp -> audioConverter" << endl;
+	cerr << "\t* sounddevice.cpp -> setSound" << endl;
+	cerr << "\t* soundCTRL.cpp -> playOrPauseCTRL" << endl << endl;
+	cerr << "debugging now..." << endl << endl;
 }
 
 void

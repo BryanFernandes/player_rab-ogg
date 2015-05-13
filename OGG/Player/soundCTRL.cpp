@@ -48,13 +48,15 @@ SoundCTRL::playOrPauseCTRL()
 {
 	//cout << "[Toca ou para] playing = " << playing << endl;
 
+	fprintf(stderr, " IN: soundCTRL.cpp -> playOrPauseCTRL\n");
+
 	if (sound->m_position == -1)
 		sound->m_position = 0;
 
 	playing ^= 1;
 	SDL_PauseAudio(playing);
 
-	fprintf(stderr,"\n playOrPauseCTRL.\n\n");
+	fprintf(stderr, " OUT: soundCTRL.cpp -> playOrPauseCTRL\n");
 }
 
 void 
@@ -70,7 +72,7 @@ SoundCTRL::callback(void *userdata, uint8_t *audio, int length)
 	if (sound->m_position >= sound->size())
 	{
 		//cout << "-----------------------------" << endl;
-		//cout << "ACABOU...A MUSICA!!!" << endl;
+		cout << "ACABOU...A MUSICA!!!" << endl;
 
 		sound->m_position = -1;
 

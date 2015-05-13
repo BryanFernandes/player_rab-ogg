@@ -2,6 +2,8 @@
 
 Ui_meta::Ui_meta(const char *path)
 {
+	fprintf(stderr, " IN: ui_meta.cpp -> Ui_meta\n");
+
 	playing = true;
 	
 	markIndex = 0;
@@ -47,26 +49,28 @@ Ui_meta::Ui_meta(const char *path)
 	
 	// if(lgmk == 0)
 	// {		
-	// 	lgmk = new Lgmk;
+		lgmk = new Lgmk;
 		
-	// 	lgmk->add_mark(0);
-	// 	lgmk->add_markName("NONE");
+		lgmk->add_mark(0);
+		lgmk->add_markName("NONE");
 		
-	// 	lgmk->add_mark(duration);
-	// 	lgmk->add_markName("NONE");
+		lgmk->add_mark(duration);
+		lgmk->add_markName("NONE");
 		
-	// 	lgmk->add_subMark(0);
-	// 	lgmk->add_subMarkName("NONE");
+		lgmk->add_subMark(0);
+		lgmk->add_subMarkName("NONE");
 		
-	// 	lgmk->add_subMark(duration);
-	// 	lgmk->add_subMarkName("NONE");
+		lgmk->add_subMark(duration);
+		lgmk->add_subMarkName("NONE");
 	// }
 	
-	// m_marks = lgmk->marks();
-	// m_marksNames = lgmk->marksNames();
+	m_marks = lgmk->marks();
+	m_marksNames = lgmk->marksNames();
 	
-	// m_subMarks = lgmk->subMarks();
-	// m_subMarksNames = lgmk->subMarksNames();
+	m_subMarks = lgmk->subMarks();
+	m_subMarksNames = lgmk->subMarksNames();
+
+	fprintf(stderr, " OUT: ui_meta.cpp -> Ui_meta\n");
 }
 
 void 
@@ -157,6 +161,8 @@ Ui_meta::connections()
 void
 Ui_meta::playOrPause()
 {
+	fprintf(stderr, " IN: ui_meta.cpp -> playOrPause\n");
+
    	if(playing)
 	{
 		icon.addFile(QString::fromUtf8(":/images/pause.png"), QSize(), QIcon::Normal, QIcon::Off);
@@ -172,6 +178,8 @@ Ui_meta::playOrPause()
 
 	playOrPauseButton->setIcon(icon);
 	playing = !playing; 
+
+	fprintf(stderr, " OUT: ui_meta.cpp -> playOrPause\n");
 }
 
 void 

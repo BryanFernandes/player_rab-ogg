@@ -44,7 +44,7 @@ Ui_meta::Ui_meta(const char *path)
 	
 	duration /= (format->sampleRate() * format->numChannels());
 	duration /= (format->bitsPerSample()/8);
-	
+
 	if(lgmk == 0)
 	{		
 		lgmk = new Lgmk;

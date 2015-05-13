@@ -38,6 +38,8 @@ SoundDevice::wavBuffer() const
 void 
 SoundDevice::open(Sound *sound)
 {
+  fprintf(stderr, " IN: sounddevice.cpp -> open\n");
+
 	int rc = SDL_Init(SDL_INIT_AUDIO);
 	
 	if (rc != 0) {
@@ -63,6 +65,7 @@ SoundDevice::open(Sound *sound)
 		return;
 	}
 	
+  fprintf(stderr, " OUT: sounddevice.cpp -> open\n");
 }
 
 uint8_t* oggdec(char* path, SDL_AudioSpec *spec, uint8_t **m_wavBuffer, uint32_t *m_wavLen){
@@ -206,13 +209,13 @@ uint8_t* oggdec(char* path, SDL_AudioSpec *spec, uint8_t **m_wavBuffer, uint32_t
       fprintf(stderr,"\nBitstream is %d channel, %ldHz\n",vi.channels,vi.rate);
       fprintf(stderr,"Encoded by: %s\n\n",vc.vendor);
 
-      	spec->freq = vi.rate;
-		spec->format = AUDIO_S16;
-		spec->channels = vi.channels;
-		spec->silence = 0;
-		spec->samples = 4096;
-		spec->callback = NULL;
-		spec->userdata = NULL;
+      spec->freq = vi.rate;
+		  spec->format = AUDIO_S16;
+		  spec->channels = vi.channels;
+		  spec->silence = 0;
+		  spec->samples = 4096;
+		  spec->callback = NULL;
+		  spec->userdata = NULL;
     }
     
     /* OK, got and parsed all three headers. Initialize the Vorbis
@@ -335,15 +338,19 @@ uint8_t* oggdec(char* path, SDL_AudioSpec *spec, uint8_t **m_wavBuffer, uint32_t
 void
 SoundDevice::openWAV(char *path)
 {
-				
+	fprintf(stderr, " IN: sounddevice.cpp -> openWAV\n\n");
+
 										//pcm		//size
 	if (oggdec(path, &m_wavSpec, &m_wavBuffer, &m_wavLen) == NULL)
 	{
+    fprintf(stderr, " IN: sounddevice.cpp -> openWAV : error\n\n");    
 		cout << "Falha! " << SDL_GetError() << endl;
 		SDL_CloseAudio();
 		SDL_Quit();
 		return;
 	}
+
+  fprintf(stderr, "\n OUT: sounddevice.cpp -> openWAV\n");
 	
 	//cout << "SDL_LoadWAV: Ok!" << endl;
 }
@@ -351,11 +358,14 @@ SoundDevice::openWAV(char *path)
 void 
 SoundDevice::audioConverter()
 {
+  fprintf(stderr, " IN: sounddevice.cpp -> audioConverter\n");
+
 	int rc = SDL_BuildAudioCVT(&m_cvt, m_wavSpec.format, m_wavSpec.channels, m_wavSpec.freq,
 			m_obtained.format, m_obtained.channels, m_obtained.freq);
 
 	if (rc != 0)
 	{
+    
 		cout << "audioConverter(): Falha! " << SDL_GetError() << endl;
 		SDL_FreeWAV(m_wavBuffer);
 		SDL_Quit();
@@ -394,12 +404,16 @@ SoundDevice::audioConverter()
 	
 	SDL_FreeWAV(m_wavBuffer);
 
+  fprintf(stderr, " OUT: sounddevice.cpp -> audioConverter\n");
+
 	//cout << "audioConverter(): Ok!" << endl;
 }
 
 void 
 SoundDevice::setSound(Sound *sound)
 {
+  fprintf(stderr, " IN: sounddevice.cpp -> setSound\n");
+
 	SDL_LockAudio();
 
 	sound->m_position = 0;
@@ -407,7 +421,8 @@ SoundDevice::setSound(Sound *sound)
 	sound->setSize(m_cvt.len * m_cvt.len_mult);
 	
 	SDL_UnlockAudio();
-	
+  
+  fprintf(stderr, " OUT: sounddevice.cpp -> setSound\n");	
 	//cout << "setSound: Ok!" << endl;
 }
 
