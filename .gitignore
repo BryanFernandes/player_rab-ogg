@@ -1,0 +1,16 @@
+*.DS_Store
+SDLMain.o
+main.o
+moc_player.cpp
+moc_player.o
+moc_soundCTRL.cpp
+moc_soundCTRL.o
+moc_ui_meta.cpp
+moc_ui_meta.o
+player.o
+qrc_resource.cpp
+qrc_resource.o
+soundCTRL.o
+sounddevice.o
+ui_meta.o
+ui_player.h
