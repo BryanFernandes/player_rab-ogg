@@ -217,8 +217,8 @@ uint8_t* oggdec(char* path, SDL_AudioSpec *spec, uint8_t **m_wavBuffer, uint32_t
 		  spec->callback = NULL;
 		  spec->userdata = NULL;
 
-      fprintf(stderr, " VARIABLE VALUE: spec->freq: %d\n", spec->freq);
-      fprintf(stderr, " VARIABLE VALUE: spec->channels: %hhu\n", spec->channels);
+      fprintf(stderr, " sounddevice.cpp VARIABLE VALUE: spec->freq: %d\n", spec->freq);
+      fprintf(stderr, " sounddevice.cpp VARIABLE VALUE: spec->channels: %hhu\n", spec->channels);
     }
     
     /* OK, got and parsed all three headers. Initialize the Vorbis
@@ -311,7 +311,7 @@ uint8_t* oggdec(char* path, SDL_AudioSpec *spec, uint8_t **m_wavBuffer, uint32_t
     *m_wavBuffer = new uint8_t[spec->size];
     uint32_t count = 0;
 
-    fprintf(stderr, "\n VARIABLE SIZE: buffers: %lu", buffers.size());
+    fprintf(stderr, "\n sounddevice.cpp VARIABLE SIZE: buffers: %lu", buffers.size());
 
     for (int i = 0; i < buffers.size(); ++i)
     {
@@ -366,9 +366,9 @@ SoundDevice::audioConverter()
 {
   fprintf(stderr, " IN: sounddevice.cpp -> audioConverter\n");
 
-  fprintf(stderr, " VARIABLE VALUE: m_obtained.format: %hu\n", m_obtained.format);
-  fprintf(stderr, " VARIABLE VALUE: m_obtained.freq: %d\n", m_obtained.freq);
-  fprintf(stderr, " VARIABLE VALUE: m_obtained.channels: %hhu\n", m_obtained.channels);
+  fprintf(stderr, " sounddevice.cpp VARIABLE VALUE: m_obtained.format: %hu\n", m_obtained.format);
+  fprintf(stderr, " sounddevice.cpp VARIABLE VALUE: m_obtained.freq: %d\n", m_obtained.freq);
+  fprintf(stderr, " sounddevice.cpp VARIABLE VALUE: m_obtained.channels: %hhu\n", m_obtained.channels);
 
 	int rc = SDL_BuildAudioCVT(&m_cvt, m_wavSpec.format, m_wavSpec.channels, m_wavSpec.freq,
 			m_obtained.format, m_obtained.channels, m_obtained.freq);

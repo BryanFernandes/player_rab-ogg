@@ -63,8 +63,12 @@ void
 SoundCTRL::callback(void *userdata, uint8_t *audio, int length)
 {
 	memset(audio, 0, length);
+
+	fprintf(stderr, " soundCTRL.cpp VARIABLE VALUE: length: %d\n", length);
 	
 	Sound *sound = (Sound *) userdata;
+
+	fprintf(stderr, " soundCTRL.cpp VARIABLE VALUE: sound->size(): %d\n", sound->size());
 
 	if (sound->m_position == -1)
 		return;
