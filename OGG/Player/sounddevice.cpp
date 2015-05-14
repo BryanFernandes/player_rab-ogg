@@ -216,6 +216,9 @@ uint8_t* oggdec(char* path, SDL_AudioSpec *spec, uint8_t **m_wavBuffer, uint32_t
 		  spec->samples = 4096;
 		  spec->callback = NULL;
 		  spec->userdata = NULL;
+
+      fprintf(stderr, " VARIABLE VALUE: spec->freq: %d\n", spec->freq);
+      fprintf(stderr, " VARIABLE VALUE: spec->channels: %hhu\n", spec->channels);
     }
     
     /* OK, got and parsed all three headers. Initialize the Vorbis
@@ -304,9 +307,11 @@ uint8_t* oggdec(char* path, SDL_AudioSpec *spec, uint8_t **m_wavBuffer, uint32_t
       }
     }
     
-	*m_wavLen = spec->size;
+	  *m_wavLen = spec->size;
     *m_wavBuffer = new uint8_t[spec->size];
     uint32_t count = 0;
+
+    fprintf(stderr, "\n VARIABLE SIZE: buffers: %lu", buffers.size());
 
     for (int i = 0; i < buffers.size(); ++i)
     {
@@ -324,14 +329,15 @@ uint8_t* oggdec(char* path, SDL_AudioSpec *spec, uint8_t **m_wavBuffer, uint32_t
     
     vorbis_block_clear(&vb);
     vorbis_dsp_clear(&vd);
-        vorbis_comment_clear(&vc);
+    vorbis_comment_clear(&vc);
     vorbis_info_clear(&vi);  /* must be called last */
   }
 
   /* OK, clean up the framer */
   ogg_sync_clear(&oy);
   
-  fprintf(stderr,"Done.\n");
+  fprintf(stderr,"\nDone.\n");
+
   return *m_wavBuffer;
 }
 
@@ -340,7 +346,7 @@ SoundDevice::openWAV(char *path)
 {
 	fprintf(stderr, " IN: sounddevice.cpp -> openWAV\n\n");
 
-										//pcm		//size
+										
 	if (oggdec(path, &m_wavSpec, &m_wavBuffer, &m_wavLen) == NULL)
 	{
     fprintf(stderr, " IN: sounddevice.cpp -> openWAV : error\n\n");    
@@ -360,12 +366,16 @@ SoundDevice::audioConverter()
 {
   fprintf(stderr, " IN: sounddevice.cpp -> audioConverter\n");
 
+  fprintf(stderr, " VARIABLE VALUE: m_obtained.format: %hu\n", m_obtained.format);
+  fprintf(stderr, " VARIABLE VALUE: m_obtained.freq: %d\n", m_obtained.freq);
+  fprintf(stderr, " VARIABLE VALUE: m_obtained.channels: %hhu\n", m_obtained.channels);
+
 	int rc = SDL_BuildAudioCVT(&m_cvt, m_wavSpec.format, m_wavSpec.channels, m_wavSpec.freq,
 			m_obtained.format, m_obtained.channels, m_obtained.freq);
 
 	if (rc != 0)
 	{
-    
+
 		cout << "audioConverter(): Falha! " << SDL_GetError() << endl;
 		SDL_FreeWAV(m_wavBuffer);
 		SDL_Quit();
