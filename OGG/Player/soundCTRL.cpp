@@ -62,13 +62,14 @@ SoundCTRL::playOrPauseCTRL()
 void 
 SoundCTRL::callback(void *userdata, uint8_t *audio, int length)
 {
+	//fprintf(stderr, " IN: soundCTRL.cpp -> callback\n");
 	memset(audio, 0, length);
 
-	fprintf(stderr, " soundCTRL.cpp VARIABLE VALUE: length: %d\n", length);
+	//fprintf(stderr, " soundCTRL.cpp VARIABLE VALUE in callback: length: %d\n", length);
 	
 	Sound *sound = (Sound *) userdata;
 
-	fprintf(stderr, " soundCTRL.cpp VARIABLE VALUE: sound->size(): %d\n", sound->size());
+	//fprintf(stderr, " soundCTRL.cpp VARIABLE VALUE in callback: sound->size(): %d\n", sound->size());
 
 	if (sound->m_position == -1)
 		return;
@@ -84,6 +85,7 @@ SoundCTRL::callback(void *userdata, uint8_t *audio, int length)
 		
 		return;
 	}
+
 	int nextSamplesLength;
 
 	if (sound->m_position + length > sound->size())
@@ -95,9 +97,10 @@ SoundCTRL::callback(void *userdata, uint8_t *audio, int length)
 		SDL_MIX_MAXVOLUME / 2);
 
 	sound->m_position += nextSamplesLength;
+
+	//g_control->changeLabels();
 	
-	g_control->changeLabels();
-	
+	//fprintf(stderr, " OUT: soundCTRL.cpp -> callback\n");
 }
 
 void 
