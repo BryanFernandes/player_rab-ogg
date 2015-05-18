@@ -210,12 +210,12 @@ uint8_t* oggdec(char* path, SDL_AudioSpec *spec, uint8_t **m_wavBuffer, uint32_t
       fprintf(stderr,"Encoded by: %s\n\n",vc.vendor);
 
       spec->freq = vi.rate;
-		  spec->format = AUDIO_S16;
-		  spec->channels = vi.channels;
-		  spec->silence = 0;
-		  spec->samples = 4096;
-		  spec->callback = NULL;
-		  spec->userdata = NULL;
+	  spec->format = AUDIO_S16;
+	  spec->channels = vi.channels;
+	  spec->silence = 0;
+	  spec->samples = 4096;
+	  spec->callback = NULL;
+      spec->userdata = NULL;
 
       fprintf(stderr, " sounddevice.cpp VARIABLE VALUE in oggdec: spec->freq: %d\n", spec->freq);
       fprintf(stderr, " sounddevice.cpp VARIABLE VALUE in oggdec: spec->channels: %hhu\n", spec->channels);
@@ -257,19 +257,21 @@ uint8_t* oggdec(char* path, SDL_AudioSpec *spec, uint8_t **m_wavBuffer, uint32_t
               if(vorbis_synthesis(&vb,&op)==0) /* test for success! */
                 vorbis_synthesis_blockin(&vd,&vb);
               while((samples=vorbis_synthesis_pcmout(&vd,&pcm))>0){
-              	spec->size += samples;
+              	spec->size += vi.channels*samples;
 
               	//-------
 
-              	short *bf = new short[samples];
-              	memset(bf, 0, samples*sizeof(short));
+              	short *bf = new short[vi.channels*samples];
+              	memset(bf, 0, vi.channels*samples*sizeof(short));
               	
+                int pos = 0; 
 
-              	for (int i = 0; i < vi.channels; ++i)
-              	{
-              		for (int j = 0; j < samples; ++j)
+                for (int j = 0; j < samples; ++j)
+                {
+              	    for (int i = 0; i < vi.channels; ++i)
               		{
               			int s = pcm[i][j] * 32767.0 + 0.5;
+                        //int s = 0;
 
               			if (s > 32767)
               			{
@@ -281,11 +283,11 @@ uint8_t* oggdec(char* path, SDL_AudioSpec *spec, uint8_t **m_wavBuffer, uint32_t
               				s = -32768;
               			}
 
-              			bf[j] += s;
+              			bf[pos++] = s;
               		}
               	}
 
-              	buffers.push_back(make_pair(bf, samples));
+              	buffers.push_back(make_pair(bf, vi.channels*samples));
               	//--------
 
                 //output(pcm, samples, &vi);
@@ -307,17 +309,19 @@ uint8_t* oggdec(char* path, SDL_AudioSpec *spec, uint8_t **m_wavBuffer, uint32_t
       }
     }
     
-	  *m_wavLen = spec->size;
+	*m_wavLen = spec->size;
     *m_wavBuffer = new uint8_t[spec->size];
     uint32_t count = 0;
 
-    fprintf(stderr, "\n sounddevice.cpp VARIABLE SIZE in oggdec: buffers: %lu", buffers.size());
+    
 
-    for (int i = 0; i < buffers.size(); ++i)
+    for (unsigned long int i = 0; i < buffers.size(); ++i)
     {
   	 	memcpy(*m_wavBuffer+count, buffers[i].first, buffers[i].second*sizeof(short));
     	count += buffers[i].second;
     }
+
+fprintf(stderr, "\n sounddevice.cpp VARIABLE SIZE in oggdec: buffers: %u bytes\n",count);
 
     /* clean up this logical bitstream; before exit we see if we're
        followed by another [chained] */
