@@ -70,6 +70,18 @@ SoundDevice::openWAV(char *path)
 		SDL_Quit();
 		return;
 	}
+
+	cout << "wav len = " << m_wavLen << endl;
+
+	for (unsigned i = 0; i < m_wavLen; ++i)
+	{
+		printf(" %02x", m_wavBuffer[i]);
+
+		if (i % 20 == 19)
+			cout << endl;
+	}
+
+	cout << endl;
 	
 	//cout << "SDL_LoadWAV: Ok!" << endl;
 }

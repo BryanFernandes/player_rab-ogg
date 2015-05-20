@@ -238,8 +238,6 @@ Ui_meta::setMetaLabels(const char *path)
             ogg_sync_wrote(&oy,bytes);
         }
     
-        /* Throw the comments plus a few lines about the bitstream we're
-            decoding */
         {
             char **ptr=vc.user_comments;
             vector <char *>fields;
@@ -261,19 +259,19 @@ Ui_meta::setMetaLabels(const char *path)
 	        ++k;
             QString publisher = QString::fromStdString(fields[k]);
 	        ++k;
-            QString year = QString::fromStdString(fields[k]);
-	        ++k;
             QString address = QString::fromStdString(fields[k]);
 	        ++k;
             QString pages = QString::fromStdString(fields[k]);
+	        ++k;
+            QString year = QString::fromStdString(fields[k]);
 
 	        titleLabel->setText(title);
 	        authorLabel->setText(author);
 	        languageLabel->setText(language);
-	        publisherLabel->setText(publisher);
-	        yearLabel->setText(year);
+	        publisherLabel->setText(publisher); 
 	        addressLabel->setText(address);
 	        pagesLabel->setText(pages);
+            yearLabel->setText(year);
         }
 
         /* OK, got and parsed all three headers. Initialize the Vorbis
