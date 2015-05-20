@@ -50,7 +50,7 @@ signals:
 
 public:
 	Ui_meta(const char *path);
-	void setMetaLabels();
+	void setMetaLabels(const char *path);
 	void setMarksLabels();
 	void initLCDDisplay();
 	void initSlider();

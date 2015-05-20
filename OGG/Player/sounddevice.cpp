@@ -76,7 +76,7 @@ uint8_t* oggdec(char* path, SDL_AudioSpec *spec, uint8_t **m_wavBuffer, uint32_t
   ogg_packet       op; /* one raw packet of data for decode */
   
   vorbis_info      vi; /* struct that stores all the static vorbis bitstream
-                          settings */
+                          settings */ 
   vorbis_comment   vc; /* struct that stores all the bitstream user comments */
   vorbis_dsp_state vd; /* central working state for the packet->PCM decoder */
   vorbis_block     vb; /* local working space for packet->PCM decode */
@@ -232,6 +232,7 @@ uint8_t* oggdec(char* path, SDL_AudioSpec *spec, uint8_t **m_wavBuffer, uint32_t
     vector < pair<short *, int32_t> >buffers;
     spec->size = 0;
 
+    int convsize = 4096/vi.channels;
 
     /* The rest is just a straight decode loop until end of stream */
     while(!eos){
@@ -258,8 +259,9 @@ uint8_t* oggdec(char* path, SDL_AudioSpec *spec, uint8_t **m_wavBuffer, uint32_t
                 vorbis_synthesis_blockin(&vd,&vb);
               while((samples=vorbis_synthesis_pcmout(&vd,&pcm))>0){
               	spec->size += vi.channels*samples;
+                samples = (samples<convsize?samples:convsize);
 
-              	//-------
+              	//------- GET PCM
 
               	short *bf = new short[vi.channels*samples];
               	memset(bf, 0, vi.channels*samples*sizeof(short));
@@ -288,7 +290,7 @@ uint8_t* oggdec(char* path, SDL_AudioSpec *spec, uint8_t **m_wavBuffer, uint32_t
               	}
 
               	buffers.push_back(make_pair(bf, vi.channels*samples));
-              	//--------
+              	//-------- END GET PCM
 
                 //output(pcm, samples, &vi);
                 vorbis_synthesis_read(&vd,samples); /* tell libvorbis how
@@ -313,15 +315,13 @@ uint8_t* oggdec(char* path, SDL_AudioSpec *spec, uint8_t **m_wavBuffer, uint32_t
     *m_wavBuffer = new uint8_t[spec->size];
     uint32_t count = 0;
 
-    
-
     for (unsigned long int i = 0; i < buffers.size(); ++i)
     {
   	 	memcpy(*m_wavBuffer+count, buffers[i].first, buffers[i].second*sizeof(short));
     	count += buffers[i].second;
     }
 
-fprintf(stderr, "\n sounddevice.cpp VARIABLE SIZE in oggdec: buffers: %u bytes\n",count);
+    fprintf(stderr, "\n sounddevice.cpp VARIABLE SIZE in oggdec: buffers: %u bytes\n",count);
 
     /* clean up this logical bitstream; before exit we see if we're
        followed by another [chained] */
