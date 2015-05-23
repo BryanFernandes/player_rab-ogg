@@ -73,6 +73,16 @@ Format::encode() const
 	return data;
 }
 
+/*ID: fmt 
+	size: 16
+		audioFormat: [1]
+		numChannels: [2]
+		sampleRate: [44100]
+		byteRate: [176400]
+		blockAlign: [4]
+		bitsperSample: [16]
+*/
+
 uint32_t
 Format::decode(const Data& data, uint32_t offset)
 {
@@ -89,26 +99,32 @@ Format::decode(const Data& data, uint32_t offset)
 	
 	decoded += 4;
 	
-	uint32_t size;
-	memcpy(&size, iterator + decoded, 4);
+	uint32_t size = 16;
+	//memcpy(&size, iterator + decoded, 4);
 	decoded += 4;
-	
-	memcpy(&m_audioFormat, iterator + decoded, 2);
+
+    m_audioFormat = 1;
+	//memcpy(&m_audioFormat, iterator + decoded, 2);
 	decoded += 2;
 	
-	memcpy(&m_numChannels, iterator + decoded, 2);
+    m_numChannels = 2;
+	//memcpy(&m_numChannels, iterator + decoded, 2);
 	decoded += 2;
 	
-	memcpy(&m_sampleRate, iterator + decoded, 4);
+    m_sampleRate = 44100;
+	//memcpy(&m_sampleRate, iterator + decoded, 4);
 	decoded += 4;
 	
-	memcpy(&m_byteRate, iterator + decoded, 4);
+    m_byteRate = 176400;
+	//memcpy(&m_byteRate, iterator + decoded, 4);
 	decoded += 4;
 	
-	memcpy(&m_blockAlign, iterator + decoded, 2);
+	m_blockAlign = 4;
+    //memcpy(&m_blockAlign, iterator + decoded, 2);
 	decoded += 2;
 	 
-	memcpy(&m_bitsperSample, iterator + decoded, 2);
+	m_bitsperSample = 16;
+    //memcpy(&m_bitsperSample, iterator + decoded, 2);
 	decoded += 2;
 
 	//if(data.size()-16 > 0)

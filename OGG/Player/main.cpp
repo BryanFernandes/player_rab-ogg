@@ -28,7 +28,7 @@ int SDL_main(int argc, char *argv[])
 	 Ui_meta *uim = new Ui_meta(path);
 	 uim->setupUi(&w);
 	 uim->setMetaLabels(path);
-	// uim->setMarksLabels();
+	 uim->setMarksLabels();
 	 uim->initLCDDisplay();
 	 uim->initSlider();
 	 uim->connections();

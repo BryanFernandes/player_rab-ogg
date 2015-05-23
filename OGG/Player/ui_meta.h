@@ -90,7 +90,7 @@ private:
 	
 	Wave *wave;
 	Meta *meta;
-	Lgmk *lgmk;
+	Lgmk *lgmk_wav;
 	uint32_t duration;
 	Format *format;
 	

@@ -360,7 +360,7 @@ SoundDevice::openWAV(char *path)
 		return;
 	}
 
-    cout << "wav len = " << m_wavLen << endl;
+    /*cout << "wav len = " << m_wavLen << endl;
 
     for(unsigned i = 0; i < m_wavLen; ++i)
     {
@@ -370,7 +370,7 @@ SoundDevice::openWAV(char *path)
             cout << endl;
     }
 
-    cout << endl;
+    cout << endl;*/
 
   fprintf(stderr, "\n OUT: sounddevice.cpp -> openWAV\n");
 	

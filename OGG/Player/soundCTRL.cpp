@@ -98,7 +98,7 @@ SoundCTRL::callback(void *userdata, uint8_t *audio, int length)
 
 	sound->m_position += nextSamplesLength;
 
-	//g_control->changeLabels();
+    //g_control->changeLabels();
 	
 	//fprintf(stderr, " OUT: soundCTRL.cpp -> callback\n");
 }

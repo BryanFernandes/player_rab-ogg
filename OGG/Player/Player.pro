@@ -5,7 +5,7 @@ TEMPLATE = app
 TARGET = 
 DEPENDPATH += .
 INCLUDEPATH += . ../core/include /Library/Frameworks/SDL.framework/Headers
-LIBS += -L../core -lcore -framework Cocoa -framework SDL -framework QtGui -logg -lvorbis
+LIBS += -L../core -lcore -framework Cocoa -framework SDL -framework QtGui -logg -lvorbis -lvorbisenc -lvorbisfile
 
 # Input
 OBJECTIVE_SOURCES += SDLMain.m

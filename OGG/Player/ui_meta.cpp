@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "lgmk_ogg.h"
 
 Ui_meta::Ui_meta(const char *path)
 {
@@ -14,65 +15,70 @@ Ui_meta::Ui_meta(const char *path)
 	subMarkIndex = 0;
 	level = 1;
 	
-	duration = 50;
+	duration = 54;
 
-	// wave = Wave::load(path);
+	 /*wave = Wave::load(path);
 	
-	// vector<Chunk *> subchunks = wave->subchunks();
+	 vector<Chunk *> subchunks = wave->subchunks();
 	
-	// for(vector<Chunk *>::iterator it = subchunks.begin(); it != subchunks.end(); it++)
-	// {
-	// 	lgmk = dynamic_cast<Lgmk *>(*it);
+	 for(vector<Chunk *>::iterator it = subchunks.begin(); it != subchunks.end(); it++)
+	 {
+	 	lgmk = dynamic_cast<Lgmk *>(*it);
 		
-	// 	if(lgmk != 0)
-	// 		break;
-	// }
+	 	if(lgmk != 0)
+	 		break;
+	 }
 	
-	// for(vector<Chunk *>::iterator it = subchunks.begin(); it != subchunks.end(); it++)
-	// {
-	// 	Generic *data = dynamic_cast<Generic *>(*it);
+	 for(vector<Chunk *>::iterator it = subchunks.begin(); it != subchunks.end(); it++)
+	 {
+	 	Generic *data = dynamic_cast<Generic *>(*it);
 		
-	// 	if(data != 0 && data->id() == "data")
-	// 	{
-	// 		duration = data->size();
-	// 		break;
-	// 	}
+	 	if(data != 0 && data->id() == "data")
+	 	{
+	 		duration = data->size();
+	 		break;
+	 	}
 			
-	// }
+	 }
 	
-	// for(vector<Chunk *>::iterator it = subchunks.begin(); it != subchunks.end(); it++)
-	// {
-	// 	format = dynamic_cast<Format *>(*it);
+	 for(vector<Chunk *>::iterator it = subchunks.begin(); it != subchunks.end(); it++)
+	 {
+	 	format = dynamic_cast<Format *>(*it);
 		
-	// 	if(format != 0)
-	// 		break;
-	// }
-	
-	// duration /= (format->sampleRate() * format->numChannels());
-	// duration /= (format->bitsPerSample()/8);
-	
-	// if(lgmk == 0)
-	// {		
-		lgmk = new Lgmk;
+	 	if(format != 0)
+	 		break;
+	 }
+
+    
+
+	 duration /= (format->sampleRate() * format->numChannels());
+	 duration /= (format->bitsPerSample()/8);
+	*/
+
+    format = new Format;
+
+	 //if(lgmk == 0)
+	 //{		
+	/*lgmk = new Lgmk;
 		
-		lgmk->add_mark(0);
-		lgmk->add_markName("NONE");
+	lgmk->add_mark(0);
+	lgmk->add_markName("NONE");
 		
-		lgmk->add_mark(duration);
-		lgmk->add_markName("NONE");
+	lgmk->add_mark(duration);
+	lgmk->add_markName("NONE");
 		
-		lgmk->add_subMark(0);
-		lgmk->add_subMarkName("NONE");
+	lgmk->add_subMark(0);
+	lgmk->add_subMarkName("NONE");
 		
-		lgmk->add_subMark(duration);
-		lgmk->add_subMarkName("NONE");
-	// }
+	lgmk->add_subMark(duration);
+	lgmk->add_subMarkName("NONE");
+	 //}
 	
 	m_marks = lgmk->marks();
 	m_marksNames = lgmk->marksNames();
 	
 	m_subMarks = lgmk->subMarks();
-	m_subMarksNames = lgmk->subMarksNames();
+	m_subMarksNames = lgmk->subMarksNames();*/
 
 	fprintf(stderr, " OUT: ui_meta.cpp -> Ui_meta\n");
 }
@@ -117,6 +123,7 @@ Ui_meta::setMetaLabels(const char *path)
     vorbis_info      vi; /* struct that stores all the static vorbis bitstream
                           settings */ 
     vorbis_comment   vc; /* struct that stores all the bitstream user comments */
+    lgmk lm;
     vorbis_dsp_state vd; /* central working state for the packet->PCM decoder */
     vorbis_block     vb; /* local working space for packet->PCM decode */
   
@@ -235,10 +242,23 @@ Ui_meta::setMetaLabels(const char *path)
                 fprintf(stderr,"End of file before finding all Vorbis headers!\n");
                 exit(1);
             }
+            
+           /* int result=ogg_stream_packetout(&os, &op);
+
+            if(result == 0) break;
+            result=lgmk_synthesis_headerin(&lm, &op);
+            if(result<0)
+            {
+                fprintf(stderr,"Corrupt lgmk header.  Exiting.\n");
+                exit(1);
+            }
+            */
+
             ogg_sync_wrote(&oy,bytes);
         }
     
         {
+            //metas
             char **ptr=vc.user_comments;
             vector <char *>fields;
             int index;
@@ -272,8 +292,39 @@ Ui_meta::setMetaLabels(const char *path)
 	        addressLabel->setText(address);
 	        pagesLabel->setText(pages);
             yearLabel->setText(year);
-        }
 
+            //fprintf(stderr, "HEREEEEE");
+            
+            //marks
+            /*char **ptr_lgmk=lm.user_lgmks;
+            while(*ptr_lgmk)
+            {
+                fprintf(stderr, "%s\n", *ptr_lgmk);
+                ++ptr_lgmk;
+            }*/
+
+            lgmk_wav = new Lgmk;
+		
+	        lgmk_wav->add_mark(0);
+	        lgmk_wav->add_markName("NONE");
+		
+	        lgmk_wav->add_mark(duration);
+	        lgmk_wav->add_markName("NONE");
+	        
+            lgmk_wav->add_subMark(0);
+	        lgmk_wav->add_subMarkName("NONE");
+		
+	        lgmk_wav->add_subMark(duration);
+	        lgmk_wav->add_subMarkName("NONE");
+	
+	        m_marks = lgmk_wav->marks();
+	        m_marksNames = lgmk_wav->marksNames();
+	
+	        m_subMarks = lgmk_wav->subMarks();
+	        m_subMarksNames = lgmk_wav->subMarksNames();
+            
+        }
+        
         /* OK, got and parsed all three headers. Initialize the Vorbis
             packet->PCM decoder. */
         vorbis_synthesis_init(&vd,&vi); /* central decode state */
@@ -696,7 +747,7 @@ Ui_meta::setSubMarkIndex(int newSubMarkIndex)
 Lgmk *
 Ui_meta::getLgmk() const
 {
-	return lgmk;
+	return lgmk_wav;
 }
 
 Format *
