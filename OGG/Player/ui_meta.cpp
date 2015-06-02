@@ -296,20 +296,28 @@ Ui_meta::setMetaLabels(const char *path)
 
             fprintf(stderr, "HEREEEEE");
             
-            //marks
+            //marks 
+            lgmk_wav = new Lgmk;
+            
+            lgmk_wav->add_mark(0);
+	        lgmk_wav->add_markName("INIT");
+
             char **ptr_lgmk=lm.user_lgmks;
             while(*ptr_lgmk)
             {
-                fprintf(stderr, "%s\n", *ptr_lgmk);
-                ++ptr_lgmk;
-            }
+                string s = *ptr_lgmk;
+                int index = s.find(":");
 
-            lgmk_wav = new Lgmk;
-		
-	        lgmk_wav->add_mark(0);
-	        lgmk_wav->add_markName("INIT");
-		    lgmk_wav->add_mark(10);
-	        lgmk_wav->add_markName("TEN");
+                string time = s.substr(0, index);
+                //fprintf(stderr, "%s\n", time.c_str());
+                lgmk_wav->add_mark(stoi(time));
+                
+                string name = s.substr(index+1);
+                lgmk_wav->add_markName(name.c_str());
+
+                ++ptr_lgmk;
+            }	
+	        
 	        lgmk_wav->add_mark(duration);
 	        lgmk_wav->add_markName("END");
 	        
