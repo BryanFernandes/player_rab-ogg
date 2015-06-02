@@ -1,8 +1,8 @@
 OBJECTS = data.o generic.o sound.o wave.o format.o chunkfactory.o \
-		meta.o lgmk.o 
+		meta.o lgmk.o lgmk_ogg.o
 INCLUDES = include/data.h include/chunk.h include/generic.h include/sound.h \
 		include/wave.h include/format.h include/chunkfactory.h \
-		include/meta.h include/lgmk.h
+		include/meta.h include/lgmk.h include/lgmk_ogg.h
 
 all: 
 	@make libcore.a

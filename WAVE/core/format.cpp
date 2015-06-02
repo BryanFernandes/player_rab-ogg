@@ -114,6 +114,8 @@ Format::decode(const Data& data, uint32_t offset)
 	//if(data.size()-16 > 0)
 		//decoded += (data.size()-16);
 
+    fprintf(stderr, "FORMAT::DECODE\n\n");
+
 	return decoded;	
 }
 

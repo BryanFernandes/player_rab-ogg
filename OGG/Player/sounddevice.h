@@ -18,7 +18,7 @@ public:
 	uint8_t *wavBuffer() const;
 	
 	void open(Sound *sound);
-	void openWAV(char *path);
+	Format* openWAV(char *path);
 	void audioConverter();
 	void setSound(Sound *sound);
 private:

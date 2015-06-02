@@ -14,13 +14,18 @@ public:
 	Format();
 	
 	Data * encode() const;
-	uint32_t decode(const Data& data, uint32_t offset = 0);
+    uint32_t decode(const Data& data, uint32_t offset = 0);
 	
 	uint16_t audioFormat() const;
 	uint16_t numChannels() const;
 	uint32_t sampleRate() const;
 	uint16_t bitsPerSample() const;
-	
+    
+    void setAudioFormat(uint16_t audioFormat);
+    void setNumChannels(uint16_t numChannels);
+    void setSampleRate(uint32_t sampleRate);
+    void setBitsPerSample(uint16_t bitsPerSample);
+
 	void print(ostream& os) const;
 	
 	static const string id;

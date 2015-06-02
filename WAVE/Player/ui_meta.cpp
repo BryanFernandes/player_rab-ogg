@@ -29,7 +29,8 @@ Ui_meta::Ui_meta(const char *path)
 		if(data != 0 && data->id() == "data")
 		{
 			duration = data->size();
-			break;
+			//fprintf(stderr, "%d", duration);
+            break;
 		}
 			
 	}
@@ -45,7 +46,7 @@ Ui_meta::Ui_meta(const char *path)
 	duration /= (format->sampleRate() * format->numChannels());
 	duration /= (format->bitsPerSample()/8);
 
-    format->print(cout);
+    //format->print(cout);
 
 	 if(lgmk == 0)
 	 {		

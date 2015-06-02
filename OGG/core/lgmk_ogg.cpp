@@ -13,12 +13,12 @@
  void
  lgmk_add(lgmk *lm,const char *landmark)
  {
-  lm->user_lgmks=_ogg_realloc(lm->user_lgmks,
+  lm->user_lgmks=(char **)_ogg_realloc(lm->user_lgmks,
                             (lm->lgmks+2)*sizeof(*lm->user_lgmks));
-  lm->lgmk_lengths=_ogg_realloc(lm->lgmk_lengths,
+  lm->lgmk_lengths=(int *)_ogg_realloc(lm->lgmk_lengths,
                                   (lm->lgmks+2)*sizeof(*lm->lgmk_lengths));
   lm->lgmk_lengths[lm->lgmks]=strlen(landmark);
-  lm->user_lgmks[lm->lgmks]=_ogg_malloc(lm->lgmk_lengths[lm->lgmks]+1);
+  lm->user_lgmks[lm->lgmks]=(char *)_ogg_malloc(lm->lgmk_lengths[lm->lgmks]+1);
   strcpy(lm->user_lgmks[lm->lgmks], landmark);
   lm->lgmks++;
   lm->user_lgmks[lm->lgmks]=NULL;
@@ -27,7 +27,7 @@
 void
 lgmk_add_tag(lgmk *lm, const char *tag, const char *contents)
 {
-  char *landmark=alloca(strlen(tag)+strlen(contents)+2); /* +2 for : and \0 */
+  char *landmark=(char *)alloca(strlen(tag)+strlen(contents)+2); /* +2 for : and \0 */
   strcpy(landmark, tag);
   strcat(landmark, ":");
   strcat(landmark, contents);
@@ -87,21 +87,21 @@ _unpack_lgmk(lgmk *lm,oggpack_buffer *opb)
   int vendorlen=oggpack_read(opb,32);
   if(vendorlen<0)goto err_out;
   if(vendorlen>opb->storage-8)goto err_out;
-  lm->vendor=_ogg_calloc(vendorlen+1,1);
+  lm->vendor=(char *)_ogg_calloc(vendorlen+1,1);
   _v_readstring(opb,lm->vendor,vendorlen);
   i=oggpack_read(opb,32);
   if(i<0)goto err_out;
   if(i>((opb->storage-oggpack_bytes(opb))>>2))goto err_out;
   lm->lgmks=i;
-  lm->user_lgmks=_ogg_calloc(lm->lgmks+1,sizeof(*lm->user_lgmks));
-  lm->lgmk_lengths=_ogg_calloc(lm->lgmks+1, sizeof(*lm->lgmk_lengths));
+  lm->user_lgmks=(char **)_ogg_calloc(lm->lgmks+1,sizeof(*lm->user_lgmks));
+  lm->lgmk_lengths=(int *)_ogg_calloc(lm->lgmks+1, sizeof(*lm->lgmk_lengths));
 
   for(i=0;i<lm->lgmks;i++){
     int len=oggpack_read(opb,32);
     if(len<0)goto err_out;
     if(len>opb->storage-oggpack_bytes(opb))goto err_out;
     lm->lgmk_lengths[i]=len;
-    lm->user_lgmks[i]=_ogg_calloc(len+1,1);
+    lm->user_lgmks[i]=(char *)_ogg_calloc(len+1,1);
     _v_readstring(opb,lm->user_lgmks[i],len);
   }
   if(oggpack_read(opb,1)!=1)goto err_out; /* EOP check */
@@ -152,7 +152,7 @@ lgmkheader_out(lgmk *lm, ogg_packet *op)
   oggpack_writeinit(&opb);
   if(_pack_lgmk(&opb,lm)) return -1;
 
-  op->packet = _ogg_malloc(oggpack_bytes(&opb));
+  op->packet =(unsigned char *) _ogg_malloc(oggpack_bytes(&opb));
   memcpy(op->packet, opb.buffer, oggpack_bytes(&opb));
 
   op->bytes=oggpack_bytes(&opb);

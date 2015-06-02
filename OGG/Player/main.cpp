@@ -41,7 +41,7 @@ int SDL_main(int argc, char *argv[])
 	SoundDevice *device = new SoundDevice;
 	
 	device->open(sound);
-	device->openWAV(path);
+	uim->setFormat( device->openWAV(path) );
 	device->audioConverter();
 	device->setSound(sound);
 	

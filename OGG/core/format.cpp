@@ -4,12 +4,12 @@ const string Format::id = "fmt ";
 
 Format::Format()
 {
-	m_audioFormat = 0;
-	m_numChannels = 0;
-	m_sampleRate = 0;
-	m_byteRate = 0;
-	m_blockAlign = 0;
-	m_bitsperSample = 0;
+	m_audioFormat = 1;
+	m_numChannels = 2;
+	m_sampleRate = 44100;
+	m_byteRate = 176400;
+	m_blockAlign = 4;
+	m_bitsperSample = 16;
 }
 
 Data *
@@ -98,39 +98,33 @@ Format::decode(const Data& data, uint32_t offset)
 		return 0;
 	
 	decoded += 4;
-	
-	uint32_t size = 16;
-	//memcpy(&size, iterator + decoded, 4);
-	decoded += 4;
 
-    m_audioFormat = 1;
-	//memcpy(&m_audioFormat, iterator + decoded, 2);
+    uint32_t size;
+	memcpy(&size, iterator + decoded, 4);
+    decoded += 4;
+
+	memcpy(&m_audioFormat, iterator + decoded, 2);
 	decoded += 2;
 	
-    m_numChannels = 2;
-	//memcpy(&m_numChannels, iterator + decoded, 2);
-	decoded += 2;
+	memcpy(&m_numChannels, iterator + decoded, 2);
+    decoded += 2;
 	
-    m_sampleRate = 44100;
-	//memcpy(&m_sampleRate, iterator + decoded, 4);
+	memcpy(&m_sampleRate, iterator + decoded, 4);
 	decoded += 4;
 	
-    m_byteRate = 176400;
-	//memcpy(&m_byteRate, iterator + decoded, 4);
+	memcpy(&m_byteRate, iterator + decoded, 4);
 	decoded += 4;
 	
-	m_blockAlign = 4;
-    //memcpy(&m_blockAlign, iterator + decoded, 2);
+    memcpy(&m_blockAlign, iterator + decoded, 2);
 	decoded += 2;
 	 
-	m_bitsperSample = 16;
-    //memcpy(&m_bitsperSample, iterator + decoded, 2);
+    memcpy(&m_bitsperSample, iterator + decoded, 2);
 	decoded += 2;
 
 	//if(data.size()-16 > 0)
 		//decoded += (data.size()-16);
-
-	return decoded;	
+	
+    return decoded;	
 }
 
 uint16_t 
@@ -149,6 +143,30 @@ uint32_t
 Format::sampleRate() const
 {
 	return m_sampleRate;
+}
+
+void
+Format::setAudioFormat(uint16_t audioFormat)
+{
+    m_audioFormat = audioFormat;
+}
+
+void
+Format::setNumChannels(uint16_t numChannels)
+{
+    m_numChannels = numChannels;
+}
+
+void
+Format::setSampleRate(uint32_t sampleRate)
+{
+    m_sampleRate = sampleRate;
+}
+
+void
+Format::setBitsPerSample(uint16_t bitsPerSample)
+{
+    m_bitsperSample = bitsPerSample;
 }
 
 void

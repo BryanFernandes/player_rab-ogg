@@ -47,7 +47,7 @@ SoundDevice::open(Sound *sound)
 			SDL_GetError() << endl;
 		return;
 	}
-	
+
 	m_desired.freq = 44100;
 	m_desired.format = AUDIO_S16;
 	m_desired.channels = 2;
@@ -345,7 +345,7 @@ uint8_t* oggdec(char* path, SDL_AudioSpec *spec, uint8_t **m_wavBuffer, uint32_t
   return *m_wavBuffer;
 }
 
-void
+Format *
 SoundDevice::openWAV(char *path)
 {
 	fprintf(stderr, " IN: sounddevice.cpp -> openWAV\n\n");
@@ -357,7 +357,7 @@ SoundDevice::openWAV(char *path)
 		cout << "Falha! " << SDL_GetError() << endl;
 		SDL_CloseAudio();
 		SDL_Quit();
-		return;
+		return NULL;
 	}
 
     /*cout << "wav len = " << m_wavLen << endl;
@@ -372,9 +372,17 @@ SoundDevice::openWAV(char *path)
 
     cout << endl;*/
 
-  fprintf(stderr, "\n OUT: sounddevice.cpp -> openWAV\n");
+    Format *format = new Format();
+    format->setAudioFormat(m_wavSpec.format);
+    format->setNumChannels(m_wavSpec.channels);
+    format->setSampleRate(m_wavSpec.freq);
+    format->setBitsPerSample(16);
+
+    fprintf(stderr, "\n OUT: sounddevice.cpp -> openWAV\n");
 	
 	//cout << "SDL_LoadWAV: Ok!" << endl;
+
+    return format;
 }
 
 void 

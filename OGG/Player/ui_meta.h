@@ -70,7 +70,9 @@ public:
 	
 	void setMarkIndex(int newMarkIndex);
 	void setSubMarkIndex(int newSubMarkIndex);
-	
+
+    void setFormat(Format *f);
+
 	Lgmk *getLgmk() const;
 	
 	Format *getFormat() const;

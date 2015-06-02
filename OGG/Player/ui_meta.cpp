@@ -15,7 +15,7 @@ Ui_meta::Ui_meta(const char *path)
 	subMarkIndex = 0;
 	level = 1;
 	
-	duration = 54;
+	duration = 9580548;
 
 	 /*wave = Wave::load(path);
 	
@@ -48,16 +48,17 @@ Ui_meta::Ui_meta(const char *path)
 	 	if(format != 0)
 	 		break;
 	 }
+    */
+    //format = new Format();
+    //Data *data = new Data();
+    //format->decode(*data, 0);
 
-    
 
-	 duration /= (format->sampleRate() * format->numChannels());
-	 duration /= (format->bitsPerSample()/8);
-	*/
-
-    format = new Format;
-
-	 //if(lgmk == 0)
+	 //duration /= (format->sampleRate() * format->numChannels());
+	 //duration /= (format->bitsPerSample()/8);
+	 
+	
+    //if(lgmk == 0)
 	 //{		
 	/*lgmk = new Lgmk;
 		
@@ -242,8 +243,8 @@ Ui_meta::setMetaLabels(const char *path)
                 fprintf(stderr,"End of file before finding all Vorbis headers!\n");
                 exit(1);
             }
-            
-           /* int result=ogg_stream_packetout(&os, &op);
+ 
+            int result=ogg_stream_packetout(&os, &op);
 
             if(result == 0) break;
             result=lgmk_synthesis_headerin(&lm, &op);
@@ -252,7 +253,6 @@ Ui_meta::setMetaLabels(const char *path)
                 fprintf(stderr,"Corrupt lgmk header.  Exiting.\n");
                 exit(1);
             }
-            */
 
             ogg_sync_wrote(&oy,bytes);
         }
@@ -293,23 +293,24 @@ Ui_meta::setMetaLabels(const char *path)
 	        pagesLabel->setText(pages);
             yearLabel->setText(year);
 
-            //fprintf(stderr, "HEREEEEE");
+            fprintf(stderr, "HEREEEEE");
             
             //marks
-            /*char **ptr_lgmk=lm.user_lgmks;
+            char **ptr_lgmk=lm.user_lgmks;
             while(*ptr_lgmk)
             {
                 fprintf(stderr, "%s\n", *ptr_lgmk);
                 ++ptr_lgmk;
-            }*/
+            }
 
             lgmk_wav = new Lgmk;
 		
 	        lgmk_wav->add_mark(0);
-	        lgmk_wav->add_markName("NONE");
-		
+	        lgmk_wav->add_markName("INIT");
+		    lgmk_wav->add_mark(10);
+	        lgmk_wav->add_markName("TEN");
 	        lgmk_wav->add_mark(duration);
-	        lgmk_wav->add_markName("NONE");
+	        lgmk_wav->add_markName("END");
 	        
             lgmk_wav->add_subMark(0);
 	        lgmk_wav->add_subMarkName("NONE");
@@ -816,4 +817,12 @@ Ui_meta::change_song_position(int time)
 {
 	//cout << "ANDEI pelo slider"<< endl;
 	emit update_m_position((uint32_t) time, format);
+}
+
+void Ui_meta::setFormat(Format *f)
+{
+    format = f;
+    duration /= (format->sampleRate() * format->numChannels());
+	duration /= (format->bitsPerSample()/8);
+    format->print(cout);
 }

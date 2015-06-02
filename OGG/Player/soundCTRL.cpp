@@ -149,7 +149,11 @@ SoundCTRL::rewind(uint32_t timeInSeconds, Format *format)
 void 
 SoundCTRL::forward(uint32_t timeInSeconds, Format *format)
 {
-	//cout << "forward control: " << timeInSeconds << endl;
+    fprintf(stderr, "\n\n\t ****** foward control: %u\n", timeInSeconds);
+	fprintf(stderr, "\t ****** number channels: %hu\n", format->numChannels());
+    fprintf(stderr, "\t ****** sample rate: %u\n", format->sampleRate());
+    fprintf(stderr, "\t ****** bits per sample: %hu\n", format->bitsPerSample());
+    //cout << "forward control: " << timeInSeconds << endl;
 	uint32_t position = timeInSeconds * format->numChannels() * format->sampleRate() * format->bitsPerSample()/8;
 	
 	//cout << "position: " << position << endl; 
