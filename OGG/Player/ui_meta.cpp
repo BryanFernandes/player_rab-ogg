@@ -56,7 +56,8 @@ Ui_meta::Ui_meta(const char *path)
 
 	 //duration /= (format->sampleRate() * format->numChannels());
 	 //duration /= (format->bitsPerSample()/8);
-	 
+	duration /= (44100 * 2);
+    duration /= (16/8);
 	
     //if(lgmk == 0)
 	 //{		
@@ -412,6 +413,7 @@ Ui_meta::setMarksLabels()
 void 
 Ui_meta::initLCDDisplay()
 {
+    fprintf(stderr, "\n\t\tInit LCD display duration: %u\n\n", duration);
 	lcdNumber->setNumDigits(7);
 	lcdNumber->setPalette(Qt::black);
 	lcdNumber->display(QString::fromStdString("0.00:00"));	
