@@ -206,6 +206,7 @@ uint8_t* oggdec(char* path, SDL_AudioSpec *spec, uint8_t **m_wavBuffer, uint32_t
         fprintf(stderr,"%s\n",*ptr);
         ++ptr;
       }
+
       fprintf(stderr,"\nBitstream is %d channel, %ldHz\n",vi.channels,vi.rate);
       fprintf(stderr,"Encoded by: %s\n\n",vc.vendor);
 
@@ -461,15 +462,4 @@ SoundDevice::setSound(Sound *sound)
   fprintf(stderr, " OUT: sounddevice.cpp -> setSound\n");	
 	//cout << "setSound: Ok!" << endl;
 }
-
-
-
-
-
-
-
-
-
-
-
 

@@ -5,6 +5,8 @@
 #include <string.h>
 #include "lgmk_ogg.h"
 
+#include <QtSpeech>
+
 Ui_meta::Ui_meta(const char *path)
 {
 	fprintf(stderr, " IN: ui_meta.cpp -> Ui_meta\n");
@@ -286,6 +288,9 @@ Ui_meta::setMetaLabels(const char *path)
 	        ++k;
             QString year = QString::fromStdString(fields[k]);
 
+            //QtSpeech s;
+            //s.tell("Test Player with QtSpeech");
+
 	        titleLabel->setText(title);
 	        authorLabel->setText(author);
 	        languageLabel->setText(language);
@@ -294,7 +299,6 @@ Ui_meta::setMetaLabels(const char *path)
 	        pagesLabel->setText(pages);
             yearLabel->setText(year);
 
-            fprintf(stderr, "HEREEEEE");
             
             //marks 
             lgmk_wav = new Lgmk;
@@ -450,6 +454,22 @@ Ui_meta::connections()
 	
 	connect(songSlider, SIGNAL(valueChanged(int)) , this, SLOT(updateClock(int)));
 	connect(songSlider, SIGNAL(valueChanged(int)) , this, SLOT(change_song_position(int)));
+}
+
+void
+Ui_meta::setEventFilter()
+{    
+    playOrPauseButton->installEventFilter(this);
+
+    forwardButton->installEventFilter(this);
+    rewindButton->installEventFilter(this);
+
+    upLevelButton->installEventFilter(this);
+    downLevelButton->installEventFilter(this);
+
+    fastforwardButton->installEventFilter(this);
+    
+    fastrewindButton->installEventFilter(this);
 }
 
 void
@@ -835,4 +855,134 @@ void Ui_meta::setFormat(Format *f)
     duration /= (format->sampleRate() * format->numChannels());
 	duration /= (format->bitsPerSample()/8);
     format->print(cout);
+}
+
+bool
+Ui_meta::eventFilter(QObject* object, QEvent* event)
+{
+    if(object == playOrPauseButton)
+    {
+        if(event->type() == QEvent::Enter)
+        {
+            if(!lock_playOrPauseButton)
+            {
+                lock_playOrPauseButton = true;
+                QtSpeech s;
+                s.say("Play or Pause Button");
+            }
+        }
+
+        if(event->type() == QEvent::Leave)
+        {
+            lock_playOrPauseButton = false;
+        }
+    }
+
+    else if(object == forwardButton)
+    {
+        if(event->type() == QEvent::Enter)
+        {
+            if(!lock_forwardButton)
+            {
+                lock_forwardButton = true;
+                QtSpeech s;
+                s.say("Forward Button");
+            }
+        }
+
+        if(event->type() == QEvent::Leave)
+        {
+            lock_forwardButton = false;
+        }
+    }
+    
+    else if(object == rewindButton)
+    {
+        if(event->type() == QEvent::Enter)
+        {
+            if(!lock_rewindButton)
+            {
+                lock_rewindButton = true;
+                QtSpeech s;
+                s.say("Rewind Button");
+            }
+        }
+
+        if(event->type() == QEvent::Leave)
+        {
+            lock_rewindButton = false;
+        }
+    }
+   
+    else if(object == upLevelButton)
+    {
+        if(event->type() == QEvent::Enter)
+        {
+            if(!lock_upLevelButton)
+            {
+                lock_upLevelButton = true;
+                QtSpeech s;
+                s.say("Up Level Button");
+            }
+        }
+
+        if(event->type() == QEvent::Leave)
+        {
+            lock_upLevelButton = false;
+        }
+    }
+
+    else if(object == downLevelButton)
+    {
+        if(event->type() == QEvent::Enter)
+        {
+            if(!lock_downLevelButton)
+            {
+                lock_downLevelButton = true;
+                QtSpeech s;
+                s.say("Down Level Button");
+            }
+        }
+
+        if(event->type() == QEvent::Leave)
+        {
+            lock_downLevelButton = false;
+        }
+    }
+
+    else if(object == fastforwardButton)
+    {
+        if(event->type() == QEvent::Enter)
+        {
+            if(!lock_fastforwardButton)
+            {
+                lock_fastforwardButton = true;
+                QtSpeech s;
+                s.say("Fast Forward Button");
+            }
+        }
+
+        if(event->type() == QEvent::Leave)
+        {
+            lock_fastforwardButton = false;
+        }
+    }
+
+    else if(object == fastrewindButton)
+    {
+        if(event->type() == QEvent::Enter)
+        {
+            if(!lock_fastrewindButton)
+            {
+                lock_fastrewindButton = true;
+                QtSpeech s;
+                s.say("Fast Rewind Button");
+            }
+        }
+
+        if(event->type() == QEvent::Leave)
+        {
+            lock_fastrewindButton = false;
+        }
+    }
 }

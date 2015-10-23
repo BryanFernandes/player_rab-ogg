@@ -1,9 +1,13 @@
 #include "meta.h"
+#include <QtSpeech>
 
 const string Meta::id = "META";
 
 Meta::Meta()
 {
+    QtSpeech speech;
+    speech.tell("Test Ogg Player");
+
 	for (int i = 0; i <= COVER; i++)
 	{
 		fields.push_back("Unknown");
@@ -129,6 +133,9 @@ Meta::size() const
 void 
 Meta::setTitle(const string& title)
 {
+    QtSpeech speech;
+    speech.tell(title);
+
 	fields[TITLE] = title;
 }
 	

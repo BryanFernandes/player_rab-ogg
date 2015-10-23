@@ -7,6 +7,8 @@ DEPENDPATH += .
 INCLUDEPATH += . ../core/include /Library/Frameworks/SDL.framework/Headers
 LIBS += -L../core -lcore -framework Cocoa -framework SDL -framework QtGui -logg -lvorbis -lvorbisenc -lvorbisfile
 
+include(../qtspeech/QtSpeech.pri)
+
 # Input
 OBJECTIVE_SOURCES += SDLMain.m
 HEADERS += player.h soundCTRL.h sounddevice.h ui_meta.h SDLMain.h

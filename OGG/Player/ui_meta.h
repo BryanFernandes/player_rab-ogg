@@ -4,7 +4,7 @@
 #include <sstream>
 
 #include "ui_player.h"
-
+#include <QtSpeech>
 #include "generic.h"
 #include "wave.h"
 #include "meta.h"
@@ -55,7 +55,8 @@ public:
 	void initLCDDisplay();
 	void initSlider();
 	void connections();
-	bool playing;
+	void setEventFilter();
+    bool playing;
 	
 	void rewind();
 	void forward();
@@ -72,20 +73,33 @@ public:
 	void setSubMarkIndex(int newSubMarkIndex);
 
     void setFormat(Format *f);
-
-	Lgmk *getLgmk() const;
+    bool eventFilter(QObject* object, QEvent* event);
+	
+    Lgmk *getLgmk() const;
 	
 	Format *getFormat() const;
 	
 	vector<uint32_t> marks() const;
 	vector<uint32_t> subMarks() const;
 private:
-	int markIndex;
+	bool lock_playOrPauseButton;
+
+    bool lock_forwardButton;
+    bool lock_rewindButton;
+
+    bool lock_upLevelButton;
+    bool lock_downLevelButton;
+
+    bool lock_fastforwardButton;
+    
+    bool lock_fastrewindButton;
+    
+    int markIndex;
 	int subMarkIndex;
-	
+    	
 	vector<uint32_t> m_marks;
 	vector<string> m_marksNames;
-	
+
 	vector<uint32_t> m_subMarks;
 	vector<string> m_subMarksNames;
 	int level;
