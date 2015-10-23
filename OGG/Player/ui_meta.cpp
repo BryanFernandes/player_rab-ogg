@@ -700,8 +700,8 @@ Ui_meta::synchronizeMarks()
 		//cout << "\tmarkIndex: " << markIndex << endl;
 		//cout << "\tsubMarkIndex: " << subMarkIndex << endl;
 				
-		//cout << "\tmarks: " << m_marks[markIndex] << endl;
-		//cout << "\tsubMarks: " << m_subMarks[subMarkIndex] << endl;
+		//cerr << "\tmarks: " << m_marks[markIndex] << endl;
+		//cerr << "\tsubMarks: " <<  m_subMarks[subMarkIndex] << endl;
 		
 		mark  = QString::fromStdString(m_marksNames[markIndex]);
 		subMark = QString::fromStdString(m_subMarksNames[subMarkIndex]);
@@ -739,14 +739,18 @@ Ui_meta::synchronizeMarks()
 		//cout << "\tsubMarkIndex: " << subMarkIndex << endl;
 		
 		//cout << "\tmarks: " << m_marks[markIndex] << endl;
-		////cout << "\tsubMarks: " << m_subMarks[subMarkIndex] << endl;
+	    //cout << "\tsubMarks: " << m_subMarks[subMarkIndex] << endl;
 		
 		mark  = QString::fromStdString(m_marksNames[markIndex]);
 		subMark = QString::fromStdString(m_subMarksNames[subMarkIndex]);
 		
 		markLabel->setText(mark);
 		subMarkLabel->setText(subMark);
-	}
+    }
+
+    QtSpeech speech;
+    speech.say(mark);
+    speech.say(subMark);
 }
 
 int 
@@ -765,14 +769,20 @@ void
 Ui_meta::setMarkIndex(int newMarkIndex)
 {
 	if(markIndex != newMarkIndex)
-		markIndex = newMarkIndex;
+    {
+        markIndex = newMarkIndex;
+        lock_mark = true;
+    }
 }
 	
 void 
 Ui_meta::setSubMarkIndex(int newSubMarkIndex)
 {
 	if(subMarkIndex != newSubMarkIndex)
+    {
 		subMarkIndex = newSubMarkIndex;
+        lock_subMark = true;
+    }
 }
 	
 Lgmk *
@@ -810,6 +820,20 @@ Ui_meta::changeMarksLabels()
 	
 	markLabel->setText(mark);
 	subMarkLabel->setText(subMark);	
+
+    QtSpeech speech;
+
+    if(lock_mark)    
+    {
+        lock_mark = false;
+        speech.say(mark);
+    }
+
+    if(lock_subMark)
+    {
+        lock_subMark = false;
+        speech.say(subMark);
+    }
 }
 
 void 

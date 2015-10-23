@@ -94,6 +94,9 @@ private:
     
     bool lock_fastrewindButton;
     
+    bool lock_mark;
+    bool lock_subMark;
+
     int markIndex;
 	int subMarkIndex;
     	
