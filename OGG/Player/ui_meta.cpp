@@ -894,14 +894,14 @@ Ui_meta::eventFilter(QObject* object, QEvent* event)
             {
                 lock_playOrPauseButton = true;
                 QtSpeech s;
-                s.say("Play or Pause Button");
+                s.say("Botão de play ou pause");
             }
         }
 
         if(event->type() == QEvent::Leave)
         {
             lock_playOrPauseButton = false;
-            playOrPauseButton->setStyleSheet("border:1px solid #000000;");
+            playOrPauseButton->setStyleSheet("border:1px solid;");
         }
     }
 
@@ -909,17 +909,20 @@ Ui_meta::eventFilter(QObject* object, QEvent* event)
     {
         if(event->type() == QEvent::Enter)
         {
+            forwardButton->setStyleSheet("border:5px solid #ff0000;");
+
             if(!lock_forwardButton)
             {
                 lock_forwardButton = true;
                 QtSpeech s;
-                s.say("Forward Button");
+                s.say("Botão de avanço");
             }
         }
 
         if(event->type() == QEvent::Leave)
         {
             lock_forwardButton = false;
+            forwardButton->setStyleSheet("border:1px solid;");
         }
     }
     
@@ -927,17 +930,20 @@ Ui_meta::eventFilter(QObject* object, QEvent* event)
     {
         if(event->type() == QEvent::Enter)
         {
+            rewindButton->setStyleSheet("border:5px solid #ff0000;");
+
             if(!lock_rewindButton)
             {
                 lock_rewindButton = true;
                 QtSpeech s;
-                s.say("Rewind Button");
+                s.say("Botão de retrocesso");
             }
         }
 
         if(event->type() == QEvent::Leave)
         {
             lock_rewindButton = false;
+            rewindButton->setStyleSheet("border:1px solid;");
         }
     }
    
@@ -945,17 +951,20 @@ Ui_meta::eventFilter(QObject* object, QEvent* event)
     {
         if(event->type() == QEvent::Enter)
         {
+            upLevelButton->setStyleSheet("border:5px solid #ff0000;");
+
             if(!lock_upLevelButton)
             {
                 lock_upLevelButton = true;
                 QtSpeech s;
-                s.say("Up Level Button");
+                s.say("Botão de subir nível");
             }
         }
 
         if(event->type() == QEvent::Leave)
         {
             lock_upLevelButton = false;
+            upLevelButton->setStyleSheet("border:1px solid;");
         }
     }
 
@@ -963,17 +972,20 @@ Ui_meta::eventFilter(QObject* object, QEvent* event)
     {
         if(event->type() == QEvent::Enter)
         {
+            downLevelButton->setStyleSheet("border:5px solid #ff0000;");
+
             if(!lock_downLevelButton)
             {
                 lock_downLevelButton = true;
                 QtSpeech s;
-                s.say("Down Level Button");
+                s.say("Botão de descer nível");
             }
         }
 
         if(event->type() == QEvent::Leave)
         {
             lock_downLevelButton = false;
+            downLevelButton->setStyleSheet("border:1px solid;");
         }
     }
 
@@ -981,17 +993,20 @@ Ui_meta::eventFilter(QObject* object, QEvent* event)
     {
         if(event->type() == QEvent::Enter)
         {
+            fastforwardButton->setStyleSheet("border:5px solid #ff0000;");
+
             if(!lock_fastforwardButton)
             {
                 lock_fastforwardButton = true;
                 QtSpeech s;
-                s.say("Fast Forward Button");
+                s.say("Botão de avanço rápido");
             }
         }
 
         if(event->type() == QEvent::Leave)
         {
             lock_fastforwardButton = false;
+            fastforwardButton->setStyleSheet("border:1px solid;");
         }
     }
 
@@ -999,17 +1014,20 @@ Ui_meta::eventFilter(QObject* object, QEvent* event)
     {
         if(event->type() == QEvent::Enter)
         {
+            fastrewindButton->setStyleSheet("border:5px solid #ff0000;");
+
             if(!lock_fastrewindButton)
             {
                 lock_fastrewindButton = true;
                 QtSpeech s;
-                s.say("Fast Rewind Button");
+                s.say("Botão de retrocesso rapido");
             }
         }
 
         if(event->type() == QEvent::Leave)
         {
             lock_fastrewindButton = false;
+            fastrewindButton->setStyleSheet("border:1px solid;");
         }
     }
 }
