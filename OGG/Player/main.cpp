@@ -14,26 +14,6 @@
 
 using namespace std;
 
-void asyn_speech(QString msg)
-{
-    QtSpeech speech;
-    speech.say(msg);
-}
-
-void test()
-{
-    cerr << "first speech";
-    QtSpeech speech;
-    speech.say("Testing Player with speech");
-}
-
-void test2()
-{
-    cerr << "second speech";
-    QtSpeech speech;
-    speech.say("Now, I believe I can fly");
-}
-
 int SDL_main(int argc, char *argv[])
 {
 	if (argc != 2)
@@ -78,20 +58,6 @@ int SDL_main(int argc, char *argv[])
 	w.show();
 
     qDebug() << QCursor::pos();
-
-    //QtSpeech s;
-    //s.tell("Running  speech no use thread");
-
-    //thread t1(asyn_speech, "Testing Player with speech");
-    //thread t2(asyn_speech, "Now, I believe I can fly");
-
-    //t1.join();
-    //t2.join();
-    
-    //thread t1(test);
-    //thread t2(test2);
-    //t1.join();
-    //t2.join();
 
 	return app.exec();
 }

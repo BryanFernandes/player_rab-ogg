@@ -888,6 +888,8 @@ Ui_meta::eventFilter(QObject* object, QEvent* event)
     {
         if(event->type() == QEvent::Enter)
         {
+            playOrPauseButton->setStyleSheet("border:5px solid #ff0000;");
+            
             if(!lock_playOrPauseButton)
             {
                 lock_playOrPauseButton = true;
@@ -899,6 +901,7 @@ Ui_meta::eventFilter(QObject* object, QEvent* event)
         if(event->type() == QEvent::Leave)
         {
             lock_playOrPauseButton = false;
+            playOrPauseButton->setStyleSheet("border:1px solid #000000;");
         }
     }
 
