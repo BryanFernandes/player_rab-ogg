@@ -459,6 +459,16 @@ Ui_meta::connections()
 void
 Ui_meta::setEventFilter()
 {    
+    //labels
+    staticYearLabel->installEventFilter(this);
+    staticPagesLabel->installEventFilter(this);
+    staticAddressLabel->installEventFilter(this);
+    staticPublisherLabel->installEventFilter(this);
+    staticLanguageLabel->installEventFilter(this);
+    staticAutorLabel->installEventFilter(this);
+    staticTitleLabel->installEventFilter(this);
+
+    //buttons
     playOrPauseButton->installEventFilter(this);
 
     forwardButton->installEventFilter(this);
@@ -470,6 +480,15 @@ Ui_meta::setEventFilter()
     fastforwardButton->installEventFilter(this);
     
     fastrewindButton->installEventFilter(this);
+
+    //locks
+    lock_playOrPauseButton = false;
+    lock_forwardButton = false;
+    lock_rewindButton = false;
+    lock_upLevelButton = false;
+    lock_downLevelButton = false;
+    lock_fastforwardButton = false;
+    lock_fastrewindButton = false;
 }
 
 void
@@ -884,6 +903,195 @@ void Ui_meta::setFormat(Format *f)
 bool
 Ui_meta::eventFilter(QObject* object, QEvent* event)
 {
+    if(object == staticYearLabel)
+    {
+        if(event->type() == QEvent::Enter)
+        {
+            QFont font = staticYearLabel->font();
+            font.setPointSize(40);
+            staticYearLabel->setFont(font);
+
+
+            font = yearLabel->font();
+            font.setPointSize(40);
+            yearLabel->setFont(font);
+        }
+
+        else if(event->type() == QEvent::Leave)
+        {
+            
+            QFont font = staticYearLabel->font();
+            font.setPointSize(24);
+            staticYearLabel->setFont(font);
+
+            font = yearLabel->font();
+            font.setPointSize(24);
+            yearLabel->setFont(font);
+        }
+    } 
+   
+    if(object == staticPagesLabel)
+    {
+        if(event->type() == QEvent::Enter)
+        {
+            QFont font = staticPagesLabel->font();
+            font.setPointSize(40);
+            staticPagesLabel->setFont(font);
+
+
+            font = pagesLabel->font();
+            font.setPointSize(40);
+            pagesLabel->setFont(font);
+        }
+
+        else if(event->type() == QEvent::Leave)
+        {
+            
+            QFont font = staticPagesLabel->font();
+            font.setPointSize(24);
+            staticPagesLabel->setFont(font);
+
+            font = pagesLabel->font();
+            font.setPointSize(24);
+            pagesLabel->setFont(font);
+        }
+    }
+
+    if(object == staticAddressLabel)
+    {
+        if(event->type() == QEvent::Enter)
+        {
+            QFont font = staticAddressLabel->font();
+            font.setPointSize(40);
+            staticAddressLabel->setFont(font);
+
+
+            font = addressLabel->font();
+            font.setPointSize(40);
+            addressLabel->setFont(font);
+        }
+
+        else if(event->type() == QEvent::Leave)
+        {
+            
+            QFont font = staticAddressLabel->font();
+            font.setPointSize(24);
+            staticAddressLabel->setFont(font);
+
+            font = addressLabel->font();
+            font.setPointSize(24);
+            addressLabel->setFont(font);
+        }
+    }
+
+    if(object == staticPublisherLabel)
+    {
+        if(event->type() == QEvent::Enter)
+        {
+            QFont font = staticPublisherLabel->font();
+            font.setPointSize(40);
+            staticPublisherLabel->setFont(font);
+
+
+            font = publisherLabel->font();
+            font.setPointSize(40);
+            publisherLabel->setFont(font);
+        }
+
+        else if(event->type() == QEvent::Leave)
+        {
+            
+            QFont font = staticPublisherLabel->font();
+            font.setPointSize(24);
+            staticPublisherLabel->setFont(font);
+
+            font = publisherLabel->font();
+            font.setPointSize(24);
+            publisherLabel->setFont(font);
+        }
+    }
+
+    if(object == staticLanguageLabel)
+    {
+        if(event->type() == QEvent::Enter)
+        {
+            QFont font = staticLanguageLabel->font();
+            font.setPointSize(40);
+            staticLanguageLabel->setFont(font);
+
+
+            font = languageLabel->font();
+            font.setPointSize(40);
+            languageLabel->setFont(font);
+        }
+
+        else if(event->type() == QEvent::Leave)
+        {
+            
+            QFont font = staticLanguageLabel->font();
+            font.setPointSize(24);
+            staticLanguageLabel->setFont(font);
+
+            font = languageLabel->font();
+            font.setPointSize(24);
+            languageLabel->setFont(font);
+        }
+    }
+
+    if(object == staticAutorLabel)
+    {
+        if(event->type() == QEvent::Enter)
+        {
+            QFont font = staticAutorLabel->font();
+            font.setPointSize(40);
+            staticAutorLabel->setFont(font);
+
+
+            font = authorLabel->font();
+            font.setPointSize(40);
+            authorLabel->setFont(font);
+        }
+
+        else if(event->type() == QEvent::Leave)
+        {
+            
+            QFont font = staticAutorLabel->font();
+            font.setPointSize(24);
+            staticAutorLabel->setFont(font);
+
+            font = authorLabel->font();
+            font.setPointSize(24);
+            authorLabel->setFont(font);
+        }
+    }
+
+    if(object == staticTitleLabel)
+    {
+        if(event->type() == QEvent::Enter)
+        {
+            QFont font = staticTitleLabel->font();
+            font.setPointSize(40);
+            staticTitleLabel->setFont(font);
+
+
+            font = titleLabel->font();
+            font.setPointSize(40);
+            titleLabel->setFont(font);
+        }
+
+        else if(event->type() == QEvent::Leave)
+        {
+            
+            QFont font = staticTitleLabel->font();
+            font.setPointSize(24);
+            staticTitleLabel->setFont(font);
+
+            font = titleLabel->font();
+            font.setPointSize(24);
+            titleLabel->setFont(font);
+        }
+    }
+
     if(object == playOrPauseButton)
     {
         if(event->type() == QEvent::Enter)
@@ -893,19 +1101,19 @@ Ui_meta::eventFilter(QObject* object, QEvent* event)
             if(!lock_playOrPauseButton)
             {
                 lock_playOrPauseButton = true;
-                QtSpeech s;
-                s.say("Botão de play ou pause");
+                QtSpeech *s = new QtSpeech(this);
+                s->tell("Botão de play ou pause");
             }
         }
 
-        if(event->type() == QEvent::Leave)
+        else if(event->type() == QEvent::Leave)
         {
             lock_playOrPauseButton = false;
             playOrPauseButton->setStyleSheet("border:1px solid;");
         }
     }
 
-    else if(object == forwardButton)
+    if(object == forwardButton)
     {
         if(event->type() == QEvent::Enter)
         {
@@ -914,19 +1122,19 @@ Ui_meta::eventFilter(QObject* object, QEvent* event)
             if(!lock_forwardButton)
             {
                 lock_forwardButton = true;
-                QtSpeech s;
-                s.say("Botão de avanço");
+                QtSpeech *s = new QtSpeech(this);
+                s->tell("Botão de avanço");
             }
         }
 
-        if(event->type() == QEvent::Leave)
+        else if(event->type() == QEvent::Leave)
         {
             lock_forwardButton = false;
             forwardButton->setStyleSheet("border:1px solid;");
         }
     }
     
-    else if(object == rewindButton)
+    if(object == rewindButton)
     {
         if(event->type() == QEvent::Enter)
         {
@@ -935,19 +1143,19 @@ Ui_meta::eventFilter(QObject* object, QEvent* event)
             if(!lock_rewindButton)
             {
                 lock_rewindButton = true;
-                QtSpeech s;
-                s.say("Botão de retrocesso");
+                QtSpeech *s = new QtSpeech(this);
+                s->tell("Botão de retrocesso");
             }
         }
 
-        if(event->type() == QEvent::Leave)
+        else if(event->type() == QEvent::Leave)
         {
             lock_rewindButton = false;
             rewindButton->setStyleSheet("border:1px solid;");
         }
     }
    
-    else if(object == upLevelButton)
+    if(object == upLevelButton)
     {
         if(event->type() == QEvent::Enter)
         {
@@ -956,19 +1164,19 @@ Ui_meta::eventFilter(QObject* object, QEvent* event)
             if(!lock_upLevelButton)
             {
                 lock_upLevelButton = true;
-                QtSpeech s;
-                s.say("Botão de subir nível");
+                QtSpeech *s = new QtSpeech(this);
+                s->tell("Botão de subir nivel");
             }
         }
 
-        if(event->type() == QEvent::Leave)
+        else if(event->type() == QEvent::Leave)
         {
             lock_upLevelButton = false;
             upLevelButton->setStyleSheet("border:1px solid;");
         }
     }
 
-    else if(object == downLevelButton)
+    if(object == downLevelButton)
     {
         if(event->type() == QEvent::Enter)
         {
@@ -977,19 +1185,19 @@ Ui_meta::eventFilter(QObject* object, QEvent* event)
             if(!lock_downLevelButton)
             {
                 lock_downLevelButton = true;
-                QtSpeech s;
-                s.say("Botão de descer nível");
+                QtSpeech *s = new QtSpeech(this);
+                s->tell("Botão de descer nivel");
             }
         }
 
-        if(event->type() == QEvent::Leave)
+        else if(event->type() == QEvent::Leave)
         {
             lock_downLevelButton = false;
             downLevelButton->setStyleSheet("border:1px solid;");
         }
     }
 
-    else if(object == fastforwardButton)
+    if(object == fastforwardButton)
     {
         if(event->type() == QEvent::Enter)
         {
@@ -998,19 +1206,19 @@ Ui_meta::eventFilter(QObject* object, QEvent* event)
             if(!lock_fastforwardButton)
             {
                 lock_fastforwardButton = true;
-                QtSpeech s;
-                s.say("Botão de avanço rápido");
+                QtSpeech *s = new QtSpeech(this);
+                s->tell("Botão de avanço rapido");
             }
         }
 
-        if(event->type() == QEvent::Leave)
+        else if(event->type() == QEvent::Leave)
         {
             lock_fastforwardButton = false;
             fastforwardButton->setStyleSheet("border:1px solid;");
         }
     }
 
-    else if(object == fastrewindButton)
+    if(object == fastrewindButton)
     {
         if(event->type() == QEvent::Enter)
         {
@@ -1019,12 +1227,12 @@ Ui_meta::eventFilter(QObject* object, QEvent* event)
             if(!lock_fastrewindButton)
             {
                 lock_fastrewindButton = true;
-                QtSpeech s;
-                s.say("Botão de retrocesso rapido");
+                QtSpeech *s = new QtSpeech(this);
+                s->tell("Botão de retrocesso rapido");
             }
         }
 
-        if(event->type() == QEvent::Leave)
+        else if(event->type() == QEvent::Leave)
         {
             lock_fastrewindButton = false;
             fastrewindButton->setStyleSheet("border:1px solid;");
