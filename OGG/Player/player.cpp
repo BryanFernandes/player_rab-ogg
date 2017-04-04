@@ -42,6 +42,25 @@ Player::setControl(SoundCTRL *control)
 	QKeySequence kDown(Qt::Key_Down);
 	QShortcut *scDown = new QShortcut(kDown, this);
 	connect(scDown, SIGNAL(activated()), control->view, SLOT(levelDown()) );
+
+    QKeySequence kH(Qt::Key_H);
+    QShortcut *scH = new QShortcut(kH, this);
+    connect(scH, SIGNAL(activated()), control->view, SLOT(openHelperWindow()) );
+
+
+    //QKeySequence kC(Qt::Key_C);
+    //QShortcut *scC = new QShortcut(kC, this);
+    //connect(scC, SIGNAL(activated()), control, SLOT(toggleContrast()) );
+}
+
+void
+Player::setAccessibilitySupport(Accessibility *accessibility)
+{
+    this->accessibilitySupport = accessibility;
+
+    QKeySequence kC(Qt::Key_C);
+    QShortcut *scC = new QShortcut(kC, this);
+    connect(scC, SIGNAL(activated()), accessibility, SLOT(screenContrast()) );
 }
 
 Player::~Player()

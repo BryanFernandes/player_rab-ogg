@@ -306,6 +306,9 @@
      <bool>true</bool>
     </property>
     <widget class="QPushButton" name="fastrewindButton">
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
      <property name="styleSheet">
       <string notr="true">border:1px solid</string>
      </property>
@@ -324,6 +327,9 @@
      </property>
     </widget>
     <widget class="QPushButton" name="rewindButton">
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
      <property name="styleSheet">
       <string notr="true">border:1px solid</string>
      </property>
@@ -348,6 +354,9 @@
        <height>0</height>
       </size>
      </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
      <property name="styleSheet">
       <string notr="true">border:1px solid</string>
      </property>
@@ -368,6 +377,9 @@
     <widget class="QPushButton" name="forwardButton">
      <property name="enabled">
       <bool>true</bool>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="autoFillBackground">
       <bool>false</bool>
@@ -390,6 +402,9 @@
      </property>
     </widget>
     <widget class="QPushButton" name="fastforwardButton">
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
      <property name="styleSheet">
       <string notr="true">border:1px solid</string>
      </property>
@@ -460,7 +475,7 @@
      </sizepolicy>
     </property>
     <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
+     <cursorShape>ArrowCursor</cursorShape>
     </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
@@ -471,6 +486,9 @@
        <width>400</width>
        <height>50</height>
       </size>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="styleSheet">
       <string notr="true">border:1px solid</string>
@@ -495,6 +513,9 @@
        <width>400</width>
        <height>50</height>
       </size>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="styleSheet">
       <string notr="true">border:1px solid</string>

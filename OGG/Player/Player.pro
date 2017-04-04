@@ -11,7 +11,7 @@ include(../qtspeech/QtSpeech.pri)
 
 # Input
 OBJECTIVE_SOURCES += SDLMain.m
-HEADERS += player.h soundCTRL.h sounddevice.h ui_meta.h SDLMain.h
+HEADERS += player.h soundCTRL.h sounddevice.h ui_meta.h SDLMain.h accessibility.h
 FORMS += player.ui
-SOURCES += main.cpp player.cpp soundCTRL.cpp sounddevice.cpp ui_meta.cpp
+SOURCES += main.cpp player.cpp soundCTRL.cpp sounddevice.cpp ui_meta.cpp accessibility.cpp
 RESOURCES += resource.qrc

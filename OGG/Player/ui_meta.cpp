@@ -907,6 +907,9 @@ Ui_meta::eventFilter(QObject* object, QEvent* event)
     {
         if(event->type() == QEvent::Enter)
         {
+            //QMainWindow * win = (QMainWindow *) qApp->activeWindow();
+            //win->setStyleSheet("background-color:black;");
+
             QFont font = staticYearLabel->font();
             font.setPointSize(40);
             staticYearLabel->setFont(font);
@@ -1165,7 +1168,7 @@ Ui_meta::eventFilter(QObject* object, QEvent* event)
             {
                 lock_upLevelButton = true;
                 QtSpeech *s = new QtSpeech(this);
-                s->tell("Botão de subir nivel");
+                s->tell("Botão de subir n&#237;vel");
             }
         }
 

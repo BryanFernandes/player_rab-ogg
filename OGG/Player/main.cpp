@@ -55,6 +55,11 @@ int SDL_main(int argc, char *argv[])
 	w.setControl(control);
 
 	//------------------------------------
+    //Accessibility *accessibility = new Accessibility();
+    //accessibility->setupUi(&w);
+    //w.setAccessibilitySupport(accessibility);
+
+	//------------------------------------
 	w.show();
 
     qDebug() << QCursor::pos();

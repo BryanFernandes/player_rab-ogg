@@ -31,8 +31,6 @@ public slots:
 	void fastForward(Format *format);
 	void fastRewind(Format *format);
 	
-	
-		
 signals:
 	void soundPlayed();
 	
