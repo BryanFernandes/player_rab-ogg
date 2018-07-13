@@ -16,36 +16,38 @@
 # Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 # Boston, MA 02110-1301 USA
 
-DEPENDPATH += $$PWD
-INCLUDEPATH += $$PWD
+SPEECHSRCDIR = ../qtspeech
+
+#DEPENDPATH += $$PWD
+INCLUDEPATH += $$SPEECHSRCDIR
 
 HEADERS += \
-    QtSpeech \
-    QtSpeech.h \
+    $$SPEECHSRCDIR/QtSpeech \
+    $$SPEECHSRCDIR/QtSpeech.h \
 
 macx {
-    SOURCES += QtSpeech_mac.cpp
+    SOURCES += $$SPEECHSRCDIR/QtSpeech_mac.cpp
 #    LIBS *= -framework AppKit
 }
 
 win32 {
-    HEADERS += sapi.hh sphelper.hh
-    SOURCES += QtSpeech_win.cpp guids.c
+    HEADERS += $$SPEECHSRCDIR/sapi.hh $$SPEECHSRCDIR/sphelper.hh
+    SOURCES += $$SPEECHSRCDIR/QtSpeech_win.cpp guids.c
     LIBS    += -lole32
 }
 
 unix:!mac {
-    HEADERS += QtSpeech_unx.h
-    SOURCES += QtSpeech_unx.cpp
+    HEADERS += $$SPEECHSRCDIR/QtSpeech_unx.h
+    SOURCES += $$SPEECHSRCDIR/QtSpeech_unx.cpp
 
-    INCLUDEPATH += $$PWD/festival/speech_tools/include
-    INCLUDEPATH += $$PWD/festival/festival/src/include
+    INCLUDEPATH += $$SPEECHSRCDIR/festival/speech_tools/include
+    INCLUDEPATH += $$SPEECHSRCDIR/festival/festival/src/include
     INCLUDEPATH += /usr/include/festival
     INCLUDEPATH += /usr/include/speech_tools
 
     LIBS += -lncurses
-    LIBS += -L$$PWD/festival/festival/src/lib -lFestival
-    LIBS += -L$$PWD/festival/speech_tools/lib -lestools -lestbase -leststring
+    LIBS += -L$$SPEECHSRCDIR/festival/festival/src/lib -lFestival
+    LIBS += -L$$SPEECHSRCDIR/festival/speech_tools/lib -lestools -lestbase -leststring
 
     # Linux: use asound 
     LIBS += -lasound

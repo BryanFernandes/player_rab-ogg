@@ -134,7 +134,7 @@ void
 Meta::setTitle(const string& title)
 {
     QtSpeech speech;
-    speech.tell(title);
+    speech.tell("Test sound");
 
 	fields[TITLE] = title;
 }

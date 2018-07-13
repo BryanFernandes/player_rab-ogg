@@ -426,7 +426,7 @@ void
 Ui_meta::initLCDDisplay()
 {
     fprintf(stderr, "\n\t\tInit LCD display duration: %u\n\n", duration);
-	lcdNumber->setNumDigits(7);
+	lcdNumber->setDigitCount(7);
 	lcdNumber->setPalette(Qt::black);
 	lcdNumber->display(QString::fromStdString("0.00:00"));	
 }

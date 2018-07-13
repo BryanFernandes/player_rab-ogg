@@ -1,4 +1,4 @@
-#include "Accessibility.h"
+#include "accessibility.h"
 
 Accessibility::Accessibility()
 {
