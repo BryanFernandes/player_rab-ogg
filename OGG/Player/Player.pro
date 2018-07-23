@@ -48,3 +48,22 @@ SOURCES += accessibility.cpp \
            ../core/meta.cpp
            
 RESOURCES += resource.qrc
+
+test { # following files will be included for unit test build
+    message(Test build)
+
+    QT += testlib #needed for QtTest
+    SOURCES -= main.cpp
+
+    HEADERS += \
+        Test/TestPlayer.h \
+        Test/UnitTest.h \
+
+    SOURCES += \
+        Test/main.cpp \
+        Test/TestPlayer.cpp \
+        Test/UnitTest.cpp \
+
+} else {
+    message(Normal build) #we will just show this message for DEbug/Release build
+}
