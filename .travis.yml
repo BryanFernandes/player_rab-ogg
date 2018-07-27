@@ -22,9 +22,9 @@ install:
  - sudo ./virtualbox_install.sh
 
 script:
-    #- vagrant up
-    #- vagrant ssh
-    #- cd Documents/Player
+    - vagrant up
+    - vagrant ssh
+    - cd Documents/Player
     #- qmake "CONFIG+=test" Player.pro #we gonna compile for Unit test first
     #- make
     # - ./Player #run unit test

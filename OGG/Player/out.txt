@@ -1,0 +1,10 @@
+	ID: fmt 
+	size: 16
+		audioFormat: [32784]
+		numChannels: [2]
+		sampleRate: [44100]
+		byteRate: [176400]
+		blockAlign: [4]
+		bitsperSample: [16]
+ACABOU...A MUSICA!!!
+ACABOU...A MUSICA!!!

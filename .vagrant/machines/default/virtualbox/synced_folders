@@ -1,1 +1,0 @@
-{"nfs":{"/home/vagrant/Documents":{"type":"nfs","rsync__exclude":".git/","guestpath":"/home/vagrant/Documents","hostpath":"/Users/Bryan/Documents/UnB/tcc-ubuntu/player_rab-ogg/OGG","disabled":false,"__vagrantfile":true,"map_uid":501,"map_gid":20,"nfs_udp":true,"nfs_version":3,"uuid":"1167416486"}}}
