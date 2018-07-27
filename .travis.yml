@@ -2,15 +2,24 @@
 sudo: yes
 dist: trusty
 
-script:
+before_install:
+ # exit on fail
  - set -eo pipefail
+
+install:
+ # update apt-get
  - sudo add-apt-repository --yes ppa:ubuntu-lxc/stable
  - sudo apt-get -qq update
  - sudo apt-get install --yes lxc lxc-templates cgroup-lite redir
+   #installing vagrant
  - wget https://releases.hashicorp.com/vagrant/2.1.1/vagrant_2.1.1_x86_64.deb
  - sudo dpkg -i vagrant_2.1.1_x86_64.deb
  - rm vagrant_2.1.1_x86_64.deb
  - vagrant plugin install vagrant-lxc
+ # installing virtual box
+ - sudo apt-get install virtualbox
+
+script:
  - vagrant up
  - vagrant ssh
  - cd Documents/Player
