@@ -1,0 +1,12 @@
+# The Trusty beta Build Environment
+sudo: yes
+dist: trusty
+
+script:
+ - vagrant up
+ - vagrant ssh
+ - cd Documents/Player
+ - qmake "CONFIG+=test" Player.pro #we gonna compile for Unit test first
+ - make
+ - ./Player #run unit test
+ - rm Makefile Player *.o #remove files (which are generated from unit test) for next build
