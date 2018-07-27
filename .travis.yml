@@ -20,6 +20,7 @@ install:
  # installing virtual box
  - chmod +x virtualbox_install.sh
  - sudo ./virtualbox_install.sh
+ - sudo /etc/init.d/vboxdrv setup
 
 script:
     - cd OGG
