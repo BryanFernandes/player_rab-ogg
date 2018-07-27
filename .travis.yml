@@ -18,7 +18,8 @@ install:
  - rm vagrant_2.1.1_x86_64.deb
  - vagrant plugin install vagrant-lxc
  # installing virtual box
- - ./virtualbox_install.sh
+ - chmod +x virtualbox_install.sh
+ - sudo ./virtualbox_install.sh
 
 script:
     #- vagrant up
