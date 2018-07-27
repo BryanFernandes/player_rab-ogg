@@ -1,6 +1,7 @@
 # The Trusty beta Build Environment
 sudo: yes
 dist: trusty
+language: generic
 
 before_install:
  # exit on fail
@@ -17,13 +18,13 @@ install:
  - rm vagrant_2.1.1_x86_64.deb
  - vagrant plugin install vagrant-lxc
  # installing virtual box
- - sudo apt-get install virtualbox
+ - ./virtualbox_install.sh
 
 script:
- - vagrant up
- - vagrant ssh
- - cd Documents/Player
- - qmake "CONFIG+=test" Player.pro #we gonna compile for Unit test first
- - make
- - ./Player #run unit test
- - rm Makefile Player *.o #remove files (which are generated from unit test) for next build
+    #- vagrant up
+    #- vagrant ssh
+    #- cd Documents/Player
+    #- qmake "CONFIG+=test" Player.pro #we gonna compile for Unit test first
+    #- make
+    # - ./Player #run unit test
+    # - rm Makefile Player *.o #remove files (which are generated from unit test) for next build
