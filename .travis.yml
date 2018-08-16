@@ -12,22 +12,24 @@ install:
  - sudo add-apt-repository --yes ppa:ubuntu-lxc/stable
  - sudo apt-get -qq update
  - sudo apt-get install --yes lxc lxc-templates cgroup-lite redir
+ # installing qt files
+ - sudo apt-get install -y qt5-default qttools5-dev-tools #install necessary Qt files
    #installing vagrant
- - wget https://releases.hashicorp.com/vagrant/2.1.1/vagrant_2.1.1_x86_64.deb
- - sudo dpkg -i vagrant_2.1.1_x86_64.deb
- - rm vagrant_2.1.1_x86_64.deb
- - vagrant plugin install vagrant-lxc
+# - wget https://releases.hashicorp.com/vagrant/2.1.1/vagrant_2.1.1_x86_64.deb
+# - sudo dpkg -i vagrant_2.1.1_x86_64.deb
+# - rm vagrant_2.1.1_x86_64.deb
+# - vagrant plugin install vagrant-lxc
  # installing virtual box
- - chmod +x virtualbox_install.sh
- - sudo ./virtualbox_install.sh
- - sudo /etc/init.d/vboxdrv setup
+# - chmod +x virtualbox_install.sh
+#- sudo ./virtualbox_install.sh
+#- sudo /etc/init.d/vboxdrv setup
 
 script:
     - cd OGG
-      #- vagrant up
-      #- vagrant ssh
-      # - cd Documents/Player
-    #- qmake "CONFIG+=test" Player.pro #we gonna compile for Unit test first
-    #- make
-    # - ./Player #run unit test
-    # - rm Makefile Player *.o #remove files (which are generated from unit test) for next build
+#- vagrant up
+#- vagrant ssh
+# - cd Documents/Player
+#- qmake "CONFIG+=test" Player.pro #we gonna compile for Unit test first
+#- make
+# - ./Player #run unit test
+# - rm Makefile Player *.o #remove files (which are generated from unit test) for next build
