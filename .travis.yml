@@ -14,6 +14,9 @@ install:
     - sudo apt-get install --yes lxc lxc-templates cgroup-lite redir
     # installing qt files
     - sudo apt-get install -y qt5-default qttools5-dev-tools #install necessary Qt files
+    # installing QtSpeech
+    - sudo apt-get install festival-dev speech-tools
+    - sudo apt-get update && apt-get install festival
     #installing vagrant
     # - wget https://releases.hashicorp.com/vagrant/2.1.1/vagrant_2.1.1_x86_64.deb
     # - sudo dpkg -i vagrant_2.1.1_x86_64.deb
