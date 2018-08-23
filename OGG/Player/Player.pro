@@ -10,6 +10,7 @@ LIBS += -L../qtspeech -lQtSpeech -pthread -lvorbis -logg -lSDL -lSDL_mixer
 QT += #CONFIG += c++11
 QMAKE_CXXFLAGS += -std=gnu++0x
 QMAKE_CFLAGS += -std=gnu++0x
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 include(../qtspeech/QtSpeech.pri)
 
