@@ -20,6 +20,8 @@ install:
     # installing QtSpeech
     - sudo apt-get install festival-dev speech-tools
       #- sudo apt-get update && apt-get install festival
+    # installing SDL
+    - sudo apt-get install libsdl1.2-dev libsdl-image1.2-dev libsdl-mixer1.2-dev libsdl-ttf2.0-dev
     #installing vagrant
     # - wget https://releases.hashicorp.com/vagrant/2.1.1/vagrant_2.1.1_x86_64.deb
     # - sudo dpkg -i vagrant_2.1.1_x86_64.deb
