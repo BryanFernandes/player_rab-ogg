@@ -12,9 +12,6 @@ private slots:
     void init();
 
     void test();
-
-private:
-    Player player;
 };
 
 #endif //TESTPLAYER_H
