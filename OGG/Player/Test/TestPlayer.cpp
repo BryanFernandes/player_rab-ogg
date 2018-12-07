@@ -1,11 +1,11 @@
 #include "TestPlayer.h"
 
-TestPlayer::TestPlayer()
+void TestPlayer::init()
 {
 
 }
 
-void TestPlayer::testInit()
+void TestPlayer::test()
 {
-    QCOMPARE(true, true);
+    QVERIFY2(&player != NULL, "check Player exist");
 }

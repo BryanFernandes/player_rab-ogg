@@ -7,7 +7,6 @@ class UnitTest
 {
 
 public:
-    UnitTest();
     static void run();
 };
 

@@ -5,14 +5,16 @@
 #include "player.h"
 
 class TestPlayer: public QObject {
+    
     Q_OBJECT
 
-public:
-    TestPlayer();
-
 private slots:
-    void testInit();
+    void init();
 
+    void test();
+
+private:
+    Player player;
 };
 
 #endif //TESTPLAYER_H
