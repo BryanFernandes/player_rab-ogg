@@ -58,12 +58,18 @@ test { # following files will be included for unit test build
 
     HEADERS += \
         Test/TestPlayer.h \
-        Test/UnitTest.h \
+        Test/TestMeta.h \
+        Test/TestAccessibility.h \
+        Test/TestSoundCTRL.h \
+        Test/TestSoundDevice.h \
 
     SOURCES += \
         Test/main.cpp \
         Test/TestPlayer.cpp \
-        Test/UnitTest.cpp \
+        Test/TestMeta.cpp \
+        Test/TestAccessibility.cpp \
+        Test/TestSoundCTRL.cpp \
+        Test/TestSoundDevice.cpp \
 
 } else {
     message(Normal build) #we will just show this message for DEbug/Release build

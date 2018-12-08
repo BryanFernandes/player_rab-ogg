@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
 {
 	if (argc != 2)
 	{
-		cerr << "Usage: " << argv[0] << " {rab_file.rab}\n";
+		cerr << "Usage: " << argv[0] << " {ogg_file.ogg}\n";
 		return -1;
 	}
 	

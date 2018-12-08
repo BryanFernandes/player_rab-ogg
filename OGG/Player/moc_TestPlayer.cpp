@@ -22,7 +22,7 @@ static const uint qt_meta_data_TestPlayer[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       2,   14, // methods
+       6,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -31,13 +31,18 @@ static const uint qt_meta_data_TestPlayer[] = {
 
  // slots: signature, parameters, type, tag, flags
       12,   11,   11,   11, 0x08,
-      19,   11,   11,   11, 0x08,
+      27,   11,   11,   11, 0x08,
+      45,   11,   11,   11, 0x08,
+      52,   11,   11,   11, 0x08,
+      62,   11,   11,   11, 0x08,
+      73,   11,   11,   11, 0x08,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_TestPlayer[] = {
-    "TestPlayer\0\0init()\0test()\0"
+    "TestPlayer\0\0initTestCase()\0cleanupTestCase()\0"
+    "init()\0cleanup()\0testSize()\0evilFunction()\0"
 };
 
 void TestPlayer::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -46,8 +51,12 @@ void TestPlayer::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         Q_ASSERT(staticMetaObject.cast(_o));
         TestPlayer *_t = static_cast<TestPlayer *>(_o);
         switch (_id) {
-        case 0: _t->init(); break;
-        case 1: _t->test(); break;
+        case 0: _t->initTestCase(); break;
+        case 1: _t->cleanupTestCase(); break;
+        case 2: _t->init(); break;
+        case 3: _t->cleanup(); break;
+        case 4: _t->testSize(); break;
+        case 5: _t->evilFunction(); break;
         default: ;
         }
     }
@@ -86,9 +95,9 @@ int TestPlayer::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 2)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 6;
     }
     return _id;
 }

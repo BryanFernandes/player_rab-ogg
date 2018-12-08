@@ -1,11 +1,10 @@
-#ifndef TESTPLAYER_H
-#define TESTPLAYER_H
+#ifndef TESTACCESSIBILITY_H
+#define TESTACCESSIBILITY_H
 
 #include <QtTest>
-#include "player.h"
+#include "accessibility.h"
 
-class TestPlayer: public QObject {
-    
+class TestAccessibility: public QObject {
     Q_OBJECT
 
 private slots:
@@ -19,13 +18,10 @@ private slots:
 
     // test functions - all functions prefixed with "test" will be ran as tests
     // this is automatically detected thanks to Qt's meta-information about QObjetcs
-    void testSize();
-
-    // this function is not prefixed with "test", so it won't b ran as one
-    void evilFunction();
+    void test();
 
 private:
-    Player player;
+    Accessibility *accessibility;
 };
 
-#endif //TESTPLAYER_H
+#endif //TESTACCESSIBILITY_H

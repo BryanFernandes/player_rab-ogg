@@ -1,11 +1,10 @@
-#ifndef TESTPLAYER_H
-#define TESTPLAYER_H
+#ifndef TESTSOUNDDEVICE_H
+#define TESTSOUNDDEVICE_H
 
 #include <QtTest>
-#include "player.h"
+#include "sounddevice.h"
 
-class TestPlayer: public QObject {
-    
+class TestSoundDevice: public QObject {
     Q_OBJECT
 
 private slots:
@@ -19,13 +18,10 @@ private slots:
 
     // test functions - all functions prefixed with "test" will be ran as tests
     // this is automatically detected thanks to Qt's meta-information about QObjetcs
-    void testSize();
-
-    // this function is not prefixed with "test", so it won't b ran as one
-    void evilFunction();
+    void test();
 
 private:
-    Player player;
+    SoundDevice *device;
 };
 
-#endif //TESTPLAYER_H
+#endif //TESTSOUNDDEVICE_H

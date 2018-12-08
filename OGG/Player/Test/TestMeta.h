@@ -1,11 +1,10 @@
-#ifndef TESTPLAYER_H
-#define TESTPLAYER_H
+#ifndef TESTMETA_H
+#define TESTMETA_H
 
 #include <QtTest>
-#include "player.h"
+#include "ui_meta.h"
 
-class TestPlayer: public QObject {
-    
+class TestMeta: public QObject {
     Q_OBJECT
 
 private slots:
@@ -19,13 +18,10 @@ private slots:
 
     // test functions - all functions prefixed with "test" will be ran as tests
     // this is automatically detected thanks to Qt's meta-information about QObjetcs
-    void testSize();
-
-    // this function is not prefixed with "test", so it won't b ran as one
-    void evilFunction();
+    void test();
 
 private:
-    Player player;
+    Ui_meta *uim;
 };
 
-#endif //TESTPLAYER_H
+#endif //TESTMETA_H
